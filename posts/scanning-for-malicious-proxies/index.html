@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# " lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Scanning for Malicious Proxies | David Dworken's Blog</title>
+<link href="../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+<link rel="alternate" type="application/rss+xml" title="RSS" href="../../rss.xml">
+<link rel="canonical" href="http://blog.daviddworken.com/posts/scanning-for-malicious-proxies/">
+<!--[if lt IE 9]><script src="../../assets/js/html5.js"></script><![endif]--><meta name="author" content="David Dworken">
+<link rel="prev" href="../Recoverable%20Secret%20Generator/" title="Recoverable Secret Generator" type="text/html">
+<link rel="next" href="../pywmata/" title="pyWMATA" type="text/html">
+<meta property="og:site_name" content="David Dworken's Blog">
+<meta property="og:title" content="Scanning for Malicious Proxies">
+<meta property="og:url" content="http://blog.daviddworken.com/posts/scanning-for-malicious-proxies/">
+<meta property="og:description" content="In the past few years, there has been a lot of press about HTTP proxies that transparently modify traffic to inject javascript for malicious purposes. There have been multiple presentations at DEFCON ">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2015-01-12T11:00:39-05:00">
+</head>
+<body>
+<a href="#content" class="sr-only sr-only-focusable">Skip to main content</a>
+
+<!-- Menubar -->
+
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation"><div class="container">
+<!-- This keeps the margins nice -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="http://blog.daviddworken.com/">
+
+                <span id="blog-title">David Dworken's Blog</span>
+            </a>
+        </div>
+<!-- /.navbar-header -->
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+<li>
+<a href="../../archive.html">Archive</a>
+                </li>
+<li>
+<a href="../../categories/index.html">Tags</a>
+                </li>
+<li>
+<a href="../../rss.xml">RSS feed</a>
+
+                
+            </li>
+</ul>
+<ul class="nav navbar-nav navbar-right">
+<li>
+    <a href="index.md" id="sourcelink">Source</a>
+    </li>
+
+                
+            </ul>
+</div>
+<!-- /.navbar-collapse -->
+    </div>
+<!-- /.container -->
+</nav><!-- End of Menubar --><div class="container" id="content" role="main">
+    <div class="body-content">
+        <!--Body content-->
+        <div class="row">
+            
+            
+<article class="post-text h-entry hentry postpage" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title" itemprop="headline name"><a href="." class="u-url">Scanning for Malicious Proxies</a></h1>
+
+        <div class="metadata">
+            <p class="byline author vcard"><span class="byline-name fn">David Dworken</span></p>
+            <p class="dateline"><a href="." rel="bookmark"><time class="published dt-published" datetime="2015-01-12T11:00:39-05:00" itemprop="datePublished" title="2015-01-12 11:00">2015-01-12 11:00</time></a></p>
+            
+        <p class="sourceline"><a href="index.md" id="sourcelink">Source</a></p>
+
+        </div>
+        
+
+    </header><div class="e-content entry-content" itemprop="articleBody text">
+    <div>
+<p>In the past few years, there has been a lot of press about HTTP proxies that transparently modify traffic to inject javascript for malicious purposes. There have been multiple presentations at DEFCON and blackhat about this topic and a variety of ways of exploiting it including: DDOS, credential theft, and even a distributed method of storage. </p>
+<p>Due to this, I decided to write a script to automatically scan proxies for malicious behavior such as: injecting javascript, modifying forms, and editing HTML. </p>
+<p>The first step was to get a list of proxies that are currently up and freely accessible. For this, I used a modified version of Dan McInerney's Elite Proxy Finder. Originally, this script allowed for automated speed testing and discovery of elite proxies. I modified this script so as to: </p>
+<ol>
+<li>Output <strong>all</strong> types of proxies, not just elite proxies (since anonymity is not an issue).</li>
+<li>Output proxies that support only http. This was done because proxies are not able to modify resources transmitted over SSL, so support for a protocol that I will not be testing is not needed.</li>
+<li>Export a list of proxies and their ports</li>
+</ol>
+<p>From there, I had a list of approximately 1000 active free proxies. While this is a relatively small number, I decided to move on with the experiment to see if there was any malicious behavior to be observed even in this small sample size. So on to the results!</p>
+<p>~In all 1500 proxies, there was no malicious traffic. What I mean by this is that no proxies transparently edited the traffic without making it very clear that one was not reaching the requested website. There was no injection of javascript. There was no modification of forms. Absolutely no interesting modifications.~</p>
+<p>~Thus the next step is going to be to use masscan to scan the ipv4 address space to look for free proxies, then once again search for malicious behavior.~</p>
+<p>The code used for this post is posted <a href="https://github.com/ddworken/maliciousProxyScanner">here</a> </p>
+<p>Update: I updated the script slightly so as to increase the number of proxies it discovered. With the addition of the updated script, I have discovered a number of malicious proxies that are currently active. </p>
+<p>Here is a list of all proxies detected with errant behavior and a description of their errant behavior.</p>
+<hr>
+<p>The proxy server at</p>
+<p><code>221.183.16.219:00080</code></p>
+<p>modifies HTML sent over HTTP to add the following code to every webpage</p>
+<pre class="code literal-block"><span class="nt">&lt;script</span> <span class="na">type=</span><span class="s">'text/javascript'</span> <span class="na">charset=</span><span class="s">'utf-8'</span> <span class="na">src=</span><span class="s">'http://www.adfocus.com.cn/adscript/adfocus.js'</span><span class="nt">&gt;&lt;/script&gt;</span>
+</pre>
+
+
+<p>Sadly, the adfocus.com.cn domain is not currently accessible, so I cannot view the injected javascript. Based off of the URL of the injected javascript, two conclusions can be made. </p>
+<ol>
+<li>It is javascript used to automatically inject ads into websites accessed over HTTP. This seems to be the most obvious solution since the domain is "adfocus.com.cn" and the javascript file is stored in the "adscript" folder and is called "adfocus.js". This would make sense since it is a free proxy, the owners of the proxy are likely trying to monetize the business. </li>
+<li>However, it seems like this might be what we are supposed to think. I say this because the javascript is hosted on the adfocus.com.cn domain, very similar to the legitimate adfocus.com. It might be that the administrators of this proxy are attempting to capture the reputation of adfocus.com so as to prove the legitimate nature of the injected code. This makes me wonder whether this code serves a more malicious purpose. The injected javascript could do anything from exploit the computer to be part of a botnet to be part of a distributed filesystem.</li>
+</ol>
+<hr>
+<p>The proxy server at</p>
+<pre class="code literal-block">115.239.210.199:80
+</pre>
+
+
+<p>automatically strips all HTML comments from the transmitted data. While this does not have any obvious negative effect, it still modifies the transmitted HTML which is an inherently bad thing for any proxy server to do. </p>
+<hr>
+<p>The proxy server at</p>
+<pre class="code literal-block">60.194.40.198:8118
+</pre>
+
+
+<p>modifies HTML sent over HTTP to add the following code to every webpage</p>
+<pre class="code literal-block"><span class="nt">&lt;script</span> <span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span> <span class="na">mediaproAccountID=</span><span class="s">"0"</span> <span class="na">mediaproSlotID=</span><span class="s">"0"</span> <span class="na">usermac=</span><span class="s">""</span> <span class="na">src=</span><span class="s">"/7b26d4601fbe440b35e496a0fcfa15f7/000c4347fbe8/w1/i.js"</span> <span class="na">async=</span><span class="s">"async"</span> <span class="err">defer</span><span class="nt">&gt;&lt;/script&gt;&lt;meta</span> <span class="na">http-equiv=</span><span class="s">"Content-Type"</span> <span class="na">content=</span><span class="s">"text/html; charset=UTF-8"</span> <span class="nt">/&gt;</span>
+</pre>
+
+
+<hr>
+<p>The interesting this about this javascript, is that the source of the javascript is on / (aka the server itself). At first glance, this seems impossible, but it turns out what the proxy is doing is hijacking all requests to <code>7b26d4601fbe440b35e496a0fcfa15f7/000c4347fbe8/w1/i.js</code> (hence the long randomly generated string) and replying with a javascript file that is actually not hosted on the webserver of the page you are trying to access. </p>
+<p>The proxy server at</p>
+<pre class="code literal-block">122.225.106.35:80
+</pre>
+
+
+<p>modifies HTML sent over HTTP to add the following code to every webpage</p>
+<pre class="code literal-block"><span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">type=</span><span class="s">"text/css"</span> <span class="na">href=</span><span class="s">"http://ads.adt100.com/bottom.css"</span> <span class="nt">/&gt;&lt;div</span> <span class="na">id=</span><span class="s">"center_xad"</span> <span class="na">class=</span><span class="s">"cwindow_xad"</span><span class="nt">&gt;</span>    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"center_title_xad"</span><span class="nt">&gt;</span>          <span class="nt">&lt;img</span> <span class="na">onclick=</span><span class="s">"closeWindow()"</span> <span class="na">width=</span><span class="s">"15px"</span> <span class="na">height=</span><span class="s">"15px"</span> <span class="na">src=</span><span class="s">"http://ads.adt100.com/images/close_btn.gif"</span><span class="nt">&gt;</span>    <span class="nt">&lt;/div&gt;</span>  <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">'center_xad_cnt'</span> <span class="na">class=</span><span class="s">"injection_content"</span><span class="nt">&gt;&lt;/div&gt;&lt;/div&gt;&lt;div</span> <span class="na">id=</span><span class="s">"right_xad"</span> <span class="na">class=</span><span class="s">"window_xad"</span><span class="nt">&gt;</span>  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"right_title_xad"</span><span class="nt">&gt;&lt;img</span> <span class="na">onclick=</span><span class="s">"closeWindow()"</span> <span class="na">width=</span><span class="s">"15px"</span> <span class="na">height=</span><span class="s">"15px"</span> <span class="na">src=</span><span class="s">"http://ads.adt100.com/images/close_btn.gif"</span><span class="nt">&gt;&lt;/div&gt;&lt;div</span> <span class="na">id=</span><span class="s">'right_xad_cnt'</span> <span class="na">class=</span><span class="s">"injection_content"</span><span class="nt">&gt;&lt;/div&gt;&lt;/div&gt;&lt;script</span> <span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">src=</span><span class="s">"http://ads.adt100.com/bottom.js"</span><span class="nt">&gt;&lt;/script&gt;&lt;/body&gt;</span>
+</pre>
+
+
+<p>This code does a number of interesting things. First of all, it adds a <a href="http://ads.adt100.com/bottom.css">new CSS style sheet</a>. While the style sheet does not do anything malicious (instead choosing to allow the page to appear normally) it is clearly malicious in its purpose, the stylesheet is not the key to the malicious code.The interesting part is <a href="http://ads.adt100.com/bottom.js">here</a>. As my knowledge of javascript is quite limited, I'm going to stop my analysis here. But based off of a quick read through of the code, it seems to be malicious in nature considering the injection of a flash object attempting to download an <a href="https://www.virustotal.com/en/file/3e9749762d7390ac3e6ba4ff7e93ce3fe2fcf6a05ad6cef736e1d4d782858dec/analysis/1421268628/">exe</a>.</p>
+<hr>
+<p>So far, I have only analyzed a few select malicious proxies. A full data dump from running this script is available in the Github repo <a href="https://github.com/ddworken/maliciousProxyScanner/blob/master/output.txt">here </a>if anyone wants to give an automated analysis a shot (6500+ lines).</p>
+</div>
+    </div>
+    <aside class="postpromonav"><nav><ul class="pager hidden-print">
+<li class="previous">
+                <a href="../Recoverable%20Secret%20Generator/" rel="prev" title="Recoverable Secret Generator">Previous post</a>
+            </li>
+            <li class="next">
+                <a href="../pywmata/" rel="next" title="pyWMATA">Next post</a>
+            </li>
+        </ul></nav></aside></article>
+</div>
+        <!--End of body content-->
+
+        <footer id="footer">
+            Contents © 2016         <a href="mailto:david@daviddworken.com">David Dworken</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
+            
+        </footer>
+</div>
+</div>
+
+
+            <script src="../../assets/js/all-nocdn.js"></script><script>$('a.image-reference:not(.islink) img:not(.islink)').parent().colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script><!-- fancy dates --><script>
+    moment.locale("");
+    fancydates(0, "YYYY-MM-DD HH:mm");
+    </script><!-- end fancy dates -->
+</body>
+</html>

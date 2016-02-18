@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# " lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="description" content="David Dworken's Blog">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>David Dworken's Blog | David Dworken's Blog</title>
+<link href="assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+<link rel="alternate" type="application/rss+xml" title="RSS" href="rss.xml">
+<link rel="canonical" href="http://blog.daviddworken.com/">
+<!--[if lt IE 9]><script src="assets/js/html5.js"></script><![endif]--><link rel="prefetch" href="posts/slope-field-generator/" type="text/html">
+</head>
+<body>
+<a href="#content" class="sr-only sr-only-focusable">Skip to main content</a>
+
+<!-- Menubar -->
+
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation"><div class="container">
+<!-- This keeps the margins nice -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="http://blog.daviddworken.com/">
+
+                <span id="blog-title">David Dworken's Blog</span>
+            </a>
+        </div>
+<!-- /.navbar-header -->
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+<li>
+<a href="archive.html">Archive</a>
+                </li>
+<li>
+<a href="categories/index.html">Tags</a>
+                </li>
+<li>
+<a href="rss.xml">RSS feed</a>
+
+                
+            </li>
+</ul>
+<ul class="nav navbar-nav navbar-right"></ul>
+</div>
+<!-- /.navbar-collapse -->
+    </div>
+<!-- /.container -->
+</nav><!-- End of Menubar --><div class="container" id="content" role="main">
+    <div class="body-content">
+        <!--Body content-->
+        <div class="row">
+            
+            
+
+<div class="postindex">
+    <article class="h-entry post-text"><header><h1 class="p-name entry-title"><a href="posts/slope-field-generator/" class="u-url">Slope Field Generator</a></h1>
+        <div class="metadata">
+            <p class="byline author vcard"><span class="byline-name fn">David Dworken</span></p>
+            <p class="dateline"><a href="posts/slope-field-generator/" rel="bookmark"><time class="published dt-published" datetime="2016-02-17T11:17:52-05:00" title="2016-02-17 11:17">2016-02-17 11:17</time></a></p>
+        </div>
+    </header><div class="e-content entry-content">
+    <div>
+<p>In my BC Calculus class we were talking about slope fields and Euler's method, so I wanted to program my own slope field generator.</p>
+<p>See github.com/ddworken/SlopeFields/</p>
+<p><img alt="figure_1" src="https://cloud.githubusercontent.com/assets/5304541/12697204/5f73cdd8-c74b-11e5-9cff-0c7e8f0818c0.png"><img alt="figure_2" src="https://cloud.githubusercontent.com/assets/5304541/12697203/5f633db0-c74b-11e5-95fd-1a486c8d801a.png"><img alt="figure_3" src="https://cloud.githubusercontent.com/assets/5304541/12697274/672e5154-c74d-11e5-98da-6cfe54eabce3.png"><img alt="figure_4" src="https://cloud.githubusercontent.com/assets/5304541/12697949/0c72fd6c-c75e-11e5-81fb-fe990d56c3bc.png"><img alt="figure_5" src="https://cloud.githubusercontent.com/assets/5304541/12706974/7736c270-c85b-11e5-830b-7acaf35b4331.png"><img alt="figure_9" src="https://cloud.githubusercontent.com/assets/5304541/12723228/8e36fe92-c8d6-11e5-9371-6f6b214c2338.png"><img alt="figure_8" src="https://cloud.githubusercontent.com/assets/5304541/12723226/8e347e9c-c8d6-11e5-8c20-6408c164914b.png"><img alt="figure_7" src="https://cloud.githubusercontent.com/assets/5304541/12723227/8e34b272-c8d6-11e5-87ff-c39c22260561.png"><img alt="figure_6" src="https://cloud.githubusercontent.com/assets/5304541/12723229/8e3b7e72-c8d6-11e5-846e-d5fce1e0b201.png"></p>
+</div>
+    </div>
+    </article><article class="h-entry post-text"><header><h1 class="p-name entry-title"><a href="posts/kbfs-on-linux/" class="u-url">KBFS On Linux</a></h1>
+        <div class="metadata">
+            <p class="byline author vcard"><span class="byline-name fn">David Dworken</span></p>
+            <p class="dateline"><a href="posts/kbfs-on-linux/" rel="bookmark"><time class="published dt-published" datetime="2016-02-16T11:16:54-05:00" title="2016-02-16 11:16">2016-02-16 11:16</time></a></p>
+        </div>
+    </header><div class="e-content entry-content">
+    <div>
+<p>By default, the KBFS will only run on linux. This is a short guide on how to setup KBFS on Linux (tested on Ubuntu 15.10 with a BTRFS root). Note that this is unsupported and takes a little bit of work to get it to work. </p>
+<p>Start by making sure you have the most recent version of Keybase. Assuming you installed from the <code>.deb</code>, run <code>sudo apt-get upate</code> then <code>sudo apt-get install keybase</code>. </p>
+<p>So now we need to set up the filesystem for KBFS. Start by killing keybase so it doesn't mess with anything as we go: <code>sudo killall keybase</code>. So now you need to create the <code>/keybase</code> folder so run <code>sudo mkdir /keybase</code>. Then we need to change the owner of <code>/keybase</code> to your user (from root) so that keybase can modify this. So run <code>sudo chown username:username /keybase</code>. Once that is done you can test it by <code>cd</code>ing into the directory. </p>
+<p>So now just start the keybase daemon by running <code>run_keybase</code>. A box will pop up asking you to unlock your device key so KBFS can run. From here you can <code>cd</code> into <code>/keybase/</code> to play around. </p>
+<p>Note that <code>ls</code> and <code>cd</code> have some weird behavior in this folder. Since it is a FUSE it doesn't follow all the normal specifications. For example, if you <code>cd /keybase/public/</code> and <code>ls</code> you will not see a <code>dworken</code> folder, but if you <code>cd dworken</code> you will enter my public folder. So when playing around don't expect KBFS to follow your normal expectations on how <code>cd</code> and <code>ls</code> work.</p>
+</div>
+    </div>
+    </article><article class="h-entry post-text"><header><h1 class="p-name entry-title"><a href="posts/abusing-googles-unlimited-photo-storage-for-fun-and-profit/" class="u-url">(Ab)using Google’s Unlimited Photo Storage for Fun and Profit</a></h1>
+        <div class="metadata">
+            <p class="byline author vcard"><span class="byline-name fn">David Dworken</span></p>
+            <p class="dateline"><a href="posts/abusing-googles-unlimited-photo-storage-for-fun-and-profit/" rel="bookmark"><time class="published dt-published" datetime="2015-08-06T11:14:20-05:00" title="2015-08-06 11:14">2015-08-06 11:14</time></a></p>
+        </div>
+    </header><div class="e-content entry-content">
+    <div>
+<h2>'Unlimited' Storage</h2>
+<p>Google has recently made unlimited free storage available on google photos. At first glance this seems truly amazing (and ripe for abuse). The one caveat to this claim is that all photos uploaded to Google Photos are compressed with lossy compression. This means that any photos uploaded to Google Photos are automatically compressed thereby loosing some detail. </p>
+<p>At first glance, it would appear that this would prevent people from abusing their service since it would make it impossible to upload arbitrary files to their servers since lossy compression would destroy any files uploaded. This also means that many types of steganography would fail if one were to try to store arbitrary data on Google Photos. </p>
+<h2>The Workaround</h2>
+<p>By uploading images of text to Google Photos, we are able to upload arbitrary data. This is because whatever type of lossy image compression Google is using will leave all text in photos intact (as would be expected by the users of Google Photos). </p>
+<p>So this means that in order to store arbitray data on Google Photos, all you have to do is:</p>
+<ol>
+<li>Base64 encode a file. </li>
+<li>Create a series of images containing the above text (Google Photos only allows images under 16 megapixels)</li>
+<li>Upload the images</li>
+</ol>
+<p>And conversely, when retrieving the data from Google Photos, all that has to be done is:</p>
+<ol>
+<li>Run image recognition on each photo to get the text.</li>
+<li>Base64 decode the text</li>
+<li>Concatenate the base64 decoded text from each image into one big file</li>
+</ol>
+<h2>The Code</h2>
+<p>I have written a custom python program to implement the above. The code for it is <a href="https://github.com/ddworken/GooglePhotosStorage">here</a>. To use it import is as a library and call getImages('fileToBackup') and it will generate the photos for you to upload to Google Photos. To recover the file, download the images from Google Photos into your current dir and call getMessage('fileToBackup'). </p>
+<h2>So What?</h2>
+<p>There are two main uses of this. The first use would be to use this to scheme to upload images to Google Photos thereby preventing Google from running their lossy compression algorithm on your photos. </p>
+<p>The other use of this would be as a true back up service. Since one can upload arbitray files to Google Photos, one can use this as a long term backup solution. One could even write a FUSE filesystem so as to allow for Google Photos to be mounted onto a computer as an external hard drive.</p>
+</div>
+    </div>
+    </article><article class="h-entry post-text"><header><h1 class="p-name entry-title"><a href="posts/bug-bounties-list/" class="u-url">Bug Bounties List!</a></h1>
+        <div class="metadata">
+            <p class="byline author vcard"><span class="byline-name fn">David Dworken</span></p>
+            <p class="dateline"><a href="posts/bug-bounties-list/" rel="bookmark"><time class="published dt-published" datetime="2015-03-29T11:13:18-05:00" title="2015-03-29 11:13">2015-03-29 11:13</time></a></p>
+        </div>
+    </header><div class="e-content entry-content">
+    <div>
+<h2>The List</h2>
+<p>Over the past 2 months, I've spent some time working on bug bounties. In the past two months, I have found vulnerabilities in the following websites: </p>
+<ul>
+<li>AT&amp;T</li>
+<li>Adobe</li>
+<li>Dyn</li>
+<li>Go Daddy</li>
+<li>Western Union</li>
+<li>Symantec</li>
+<li>IBM</li>
+<li>Vistaprint</li>
+<li>Hobby King</li>
+<li>Tumblr</li>
+<li>Haiku Learning</li>
+<li>Mozilla</li>
+<li>Maret</li>
+<li>eBay</li>
+<li>iFixIt</li>
+<li>MailChimp</li>
+<li>Amazon</li>
+<li>Steam</li>
+<li>Netflix</li>
+<li>Appcelerator</li>
+<li>mail.ru</li>
+</ul>
+<p>So far most of these companies have responded and they have either patched or they are actively working towards patching the vulnerabilities. Once these companies approve public disclosure, I will be adding write ups for each vulnerability to the bottom of this blog post.</p>
+</div>
+    </div>
+    </article><article class="h-entry post-text"><header><h1 class="p-name entry-title"><a href="posts/using-xsscrapy-to-scan-for-xss-vulnerabilities/" class="u-url">Using XSScrapy to Scan for XSS Vulnerabilities</a></h1>
+        <div class="metadata">
+            <p class="byline author vcard"><span class="byline-name fn">David Dworken</span></p>
+            <p class="dateline"><a href="posts/using-xsscrapy-to-scan-for-xss-vulnerabilities/" rel="bookmark"><time class="published dt-published" datetime="2015-02-26T11:10:26-05:00" title="2015-02-26 11:10">2015-02-26 11:10</time></a></p>
+        </div>
+    </header><div class="e-content entry-content">
+    <div class="page">
+    <div class="preview-page">
+    <div class="container">
+      <div class="repository-with-sidebar repo-container with-full-navigation">
+          <div class="repository-content context-loader-container">
+            <div id="readme" class="boxed-group flush clearfix announce instapaper_body md">
+              <div class="markdown-body entry-content">
+<h1></h1>
+<p><a href="posts/using-xsscrapy-to-scan-for-xss-vulnerabilities/#using-xsscrapy-to-scan-for-xss-vulnerabilities"><span class="octicon octicon-link"></span></a>Using XSScrapy to Scan for XSS Vulnerabilities</p>
+<p><a href="https://github.com/DanMcInerney/xsscrapy">XSScrapy</a> is an amazing tool for the aspiring cyber security researcher. Entering the cyber security field used to be challenging and full of hours of wasted research with nothing to show for it. With XSScrapy, that is no longer true. 
+</p>
+<h4></h4>
+<p><a href="posts/using-xsscrapy-to-scan-for-xss-vulnerabilities/#so-what-is-an-xss-vulnerability"><span class="octicon octicon-link"></span></a>So what is an XSS Vulnerability</p>
+<p>A XSS vulnerability is what happens when a website displays user input without escaping this. If this makes sense to you, continue to the next section.</p>
+<p>A common example of when this would happen is if the website returned the following HTML:</p>
+<div class="highlight highlight-html"><pre>&lt;<span class="pl-ent">a</span> <span class="pl-e">href</span>=<span class="pl-s1"><span class="pl-pds">"</span>[Link to the current page]<span class="pl-pds">"</span></span>&gt;</pre></div>
+<p>So on <code>example.com</code>, this would display:</p>
+<div class="highlight highlight-html"><pre>&lt;<span class="pl-ent">a</span> <span class="pl-e">href</span>=<span class="pl-s1"><span class="pl-pds">"</span>http://example.com/<span class="pl-pds">"</span></span>&gt;</pre></div>
+<p>By loading <code>example.com/"&gt;&lt;script&gt;alert(0)&lt;/script&gt;&lt;"</code>, the  HTML becomes:</p>
+<div class="highlight highlight-html"><pre>&lt;<span class="pl-ent">a</span> <span class="pl-e">href</span>=<span class="pl-s1"><span class="pl-pds">"</span>example.com/<span class="pl-pds">"</span></span>&gt;<span class="pl-s2">&lt;<span class="pl-ent">script</span>&gt;<span class="pl-s3">alert</span>(<span class="pl-c1">0</span>)&lt;/<span class="pl-ent">script</span>&gt;</span>&lt;""&gt;</pre></div>
+<p>Which when indented properly looks like:</p>
+<div class="highlight highlight-html"><pre>&lt;<span class="pl-ent">a</span> <span class="pl-e">href</span>=<span class="pl-s1"><span class="pl-pds">"</span>example.com/<span class="pl-pds">"</span></span>&gt;
+<span class="pl-s2">&lt;<span class="pl-ent">script</span>&gt;</span>
+<span class="pl-s2">    <span class="pl-s3">alert</span>(<span class="pl-c1">0</span>)</span>
+<span class="pl-s2">&lt;/<span class="pl-ent">script</span>&gt;</span>
+&lt;""&gt;</pre></div>
+<p>All of which is valid HTML and will run properly. In this case, we have injected javascript code to display a popup box. While a popup box is not dangerous, the javascript can be used to do a number of other malicious things. For example, the injected javascript could automatically exfiltrate cookies back to an attacker owned server (thus giving the attacker access to the victim's account).</p>
+<h3></h3>
+<p><a href="posts/using-xsscrapy-to-scan-for-xss-vulnerabilities/#so-what-is-xsscrapy"><span class="octicon octicon-link"></span></a>So what is XSScrapy?</p>
+<p>XSScrapy is an XSS scanner written by Dan McInerney in Python. XSScrapy works by using scrapy to create a web spider to download the HTML of all pages on a given domain name. Scrapy finds URLs by automatically following all of the links on the website until it has scanned every single URL. Once the HTML for a page is downloaded, XSScrapy automatically searches the page for XSS vulnerabilities.</p>
+<p>This is done by looking for a number of common injection points and injecting the string <code>9zqjxel'"(){}&lt;x&gt;:9zqjxel;9</code>. The important part of this string is <code>'"(){}&lt;x&gt;:;</code>. This string contains pretty much every possibly "dangerous" character. So if the HTML is rendered without those characters being escaped, it is likely that there is an XSS vulnerability.</p>
+<h3></h3>
+<p><a href="posts/using-xsscrapy-to-scan-for-xss-vulnerabilities/#ok-lets-start-scanning"><span class="octicon octicon-link"></span></a>Ok, let's start scanning!</p>
+<p>First, follow the installation instructions <a href="https://github.com/DanMcInerney/xsscrapy/blob/master/README.md">here</a>. Once you have done that, let's find a website to scan.</p>
+<p><strong>Never</strong> run XSScrapy against a domain that you do not own or have permission to penetration test. So if you are looking for a website to practice your new found skills on, try any website that offers a bug bounty. Look on websites like Bug Crowd, Hacker One, or CrowdCurity to find websites that allow for automated scanning.</p>
+<p>Once you found one, run:</p>
+<p><code>xsscrapy.py -u http://example.com</code></p>
+<p>Once the scan is finished, let's look through the <code>xsscrapy-vulns.txt</code> file. So run <code>cat xsscrapy-vulns.txt</code>. (Assuming the program found some potential vulnerabilities) This should give you a nice list of vulnerabilities in the form of:</p>
+<pre><code>URL: [URL of the Vulnerability]
+response URL: [URL of the Vulnerability]
+Unfiltered: [The code causing the problem]
+Payload: [What was injected to trigger the problem]
+Type: [Type of Vulnerability]
+Injection point: [Where the payload was injected]
+Possible payloads: [A suggested payload to exploit: Note this is often incorrect]
+Line: [The problematic line of HTML code]
+`&lt;/pre&gt;
+
+So now lets go through an example vulnerability report line by line. 
+
+&lt;pre&gt;`URL: www.example.com/?q=9zqjxxe'"(){}&lt;x&gt;:9zqjxxe;9
+response URL: www.example.com/?q=9zqjxxe'"(){}&lt;x&gt;:9zqjxxe;9
+Unfiltered: '"(){}&lt;x&gt;
+Payload: 9zqjxxe'"(){}&lt;x&gt;:9zqjxxe;9
+Type: form
+Injection point: q
+Possible payloads: x"/onmouseover=prompt(9)/", x"x&gt;&lt;svG/onLoad=prompt(9)&gt;, x" onmouseover=prompt(9) "
+Line:  &lt;input type="hidden" name="q" value="9zqjxgm'"(){}&lt;x&gt;:9zqjxgm;9
+`&lt;/pre&gt;
+
+### 
+[&lt;span class="octicon octicon-link"&gt;&lt;/span&gt;](#developing-the-exploit-if-type--form)Developing the Exploit (if Type == form)
+
+Take the URL from the first line and load it in your browser `www.example.com/?q=9zqjxxe'"(){}&lt;x&gt;:9zqjxxe;9`
+
+Now modify the URL to `www.example.com/?q=`
+
+Then look at the the last line of XSScrapy's vulnerability report: 
+
+&lt;pre&gt;`Line:  &lt;input type="hidden" name="q" value="9zqjxgm'"(){}&lt;x&gt;:9zqjxgm;9
+</code></pre>
+<p>So based off of the above except from the HTML, we can tell that we want to first add a <code>"</code> to escape from the value variable followed by a <code>&gt;</code> to escape out into the HTML. Together, these two characters will get all following text to be interpreted as HTML. So now that we have that done, we simply tack a standard <code>&lt;script&gt;alert(0)&lt;/script&gt;</code> onto the end of <code>"&gt;</code> making our final input <code>"&gt;&lt;script&gt;alert(0)&lt;/script&gt;</code>. So now we have our payload.</p>
+<p>Take that payload and add it on to the URL we got earlier (<code>www.example.com/?q=</code>) to make <code>www.example.com/?q="&gt;&lt;script&gt;alert(0)&lt;/script&gt;</code>. Then load that URL, and you should get a pop up box displaying <code>0</code>!</p>
+<p>Now that you have gotten this far, the final step is to report the vulnerability to the website. Create an account on what ever bug bounty website they use and submit it. If you've gotten this far, then Congratulations! You've reported your first vulnerability.</p>
+<pre><code>          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+  </div>
+  </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+    </div>
+    </article><article class="h-entry post-text"><header><h1 class="p-name entry-title"><a href="posts/pywmata/" class="u-url">pyWMATA</a></h1>
+        <div class="metadata">
+            <p class="byline author vcard"><span class="byline-name fn">David Dworken</span></p>
+            <p class="dateline"><a href="posts/pywmata/" rel="bookmark"><time class="published dt-published" datetime="2015-02-07T11:08:10-05:00" title="2015-02-07 11:08">2015-02-07 11:08</time></a></p>
+        </div>
+    </header><div class="e-content entry-content">
+    <div>
+<p>For a while now I've been wanting to make my own interface to WMATA's API. WMATA (Washington Metropolitan Area Transit Authority) has a pretty good API that allows for you to get anything from current train locations, a path between two stations on the same line, elevator/escalator/rail incidents, even an API endpoint for stations near a location. </p>
+<p>The one thing that is lacking is an API to go from any one station to another. Their API does have an endpoint to get a list of stations between any two given stations with the caveat that this only works if the supplied stations are on the same line. </p>
+<p>So I wrote my own wrapper around their API in python that implements this and much much more. </p>
+<p>https://github.com/ddworken/pyWMATA</p>
+</div>
+    </div>
+    </article><article class="h-entry post-text"><header><h1 class="p-name entry-title"><a href="posts/scanning-for-malicious-proxies/" class="u-url">Scanning for Malicious Proxies</a></h1>
+        <div class="metadata">
+            <p class="byline author vcard"><span class="byline-name fn">David Dworken</span></p>
+            <p class="dateline"><a href="posts/scanning-for-malicious-proxies/" rel="bookmark"><time class="published dt-published" datetime="2015-01-12T11:00:39-05:00" title="2015-01-12 11:00">2015-01-12 11:00</time></a></p>
+        </div>
+    </header><div class="e-content entry-content">
+    <div>
+<p>In the past few years, there has been a lot of press about HTTP proxies that transparently modify traffic to inject javascript for malicious purposes. There have been multiple presentations at DEFCON and blackhat about this topic and a variety of ways of exploiting it including: DDOS, credential theft, and even a distributed method of storage. </p>
+<p>Due to this, I decided to write a script to automatically scan proxies for malicious behavior such as: injecting javascript, modifying forms, and editing HTML. </p>
+<p>The first step was to get a list of proxies that are currently up and freely accessible. For this, I used a modified version of Dan McInerney's Elite Proxy Finder. Originally, this script allowed for automated speed testing and discovery of elite proxies. I modified this script so as to: </p>
+<ol>
+<li>Output <strong>all</strong> types of proxies, not just elite proxies (since anonymity is not an issue).</li>
+<li>Output proxies that support only http. This was done because proxies are not able to modify resources transmitted over SSL, so support for a protocol that I will not be testing is not needed.</li>
+<li>Export a list of proxies and their ports</li>
+</ol>
+<p>From there, I had a list of approximately 1000 active free proxies. While this is a relatively small number, I decided to move on with the experiment to see if there was any malicious behavior to be observed even in this small sample size. So on to the results!</p>
+<p>~In all 1500 proxies, there was no malicious traffic. What I mean by this is that no proxies transparently edited the traffic without making it very clear that one was not reaching the requested website. There was no injection of javascript. There was no modification of forms. Absolutely no interesting modifications.~</p>
+<p>~Thus the next step is going to be to use masscan to scan the ipv4 address space to look for free proxies, then once again search for malicious behavior.~</p>
+<p>The code used for this post is posted <a href="https://github.com/ddworken/maliciousProxyScanner">here</a> </p>
+<p>Update: I updated the script slightly so as to increase the number of proxies it discovered. With the addition of the updated script, I have discovered a number of malicious proxies that are currently active. </p>
+<p>Here is a list of all proxies detected with errant behavior and a description of their errant behavior.</p>
+<hr>
+<p>The proxy server at</p>
+<p><code>221.183.16.219:00080</code></p>
+<p>modifies HTML sent over HTTP to add the following code to every webpage</p>
+<pre class="code literal-block"><span class="nt">&lt;script</span> <span class="na">type=</span><span class="s">'text/javascript'</span> <span class="na">charset=</span><span class="s">'utf-8'</span> <span class="na">src=</span><span class="s">'http://www.adfocus.com.cn/adscript/adfocus.js'</span><span class="nt">&gt;&lt;/script&gt;</span>
+</pre>
+
+
+<p>Sadly, the adfocus.com.cn domain is not currently accessible, so I cannot view the injected javascript. Based off of the URL of the injected javascript, two conclusions can be made. </p>
+<ol>
+<li>It is javascript used to automatically inject ads into websites accessed over HTTP. This seems to be the most obvious solution since the domain is "adfocus.com.cn" and the javascript file is stored in the "adscript" folder and is called "adfocus.js". This would make sense since it is a free proxy, the owners of the proxy are likely trying to monetize the business. </li>
+<li>However, it seems like this might be what we are supposed to think. I say this because the javascript is hosted on the adfocus.com.cn domain, very similar to the legitimate adfocus.com. It might be that the administrators of this proxy are attempting to capture the reputation of adfocus.com so as to prove the legitimate nature of the injected code. This makes me wonder whether this code serves a more malicious purpose. The injected javascript could do anything from exploit the computer to be part of a botnet to be part of a distributed filesystem.</li>
+</ol>
+<hr>
+<p>The proxy server at</p>
+<pre class="code literal-block">115.239.210.199:80
+</pre>
+
+
+<p>automatically strips all HTML comments from the transmitted data. While this does not have any obvious negative effect, it still modifies the transmitted HTML which is an inherently bad thing for any proxy server to do. </p>
+<hr>
+<p>The proxy server at</p>
+<pre class="code literal-block">60.194.40.198:8118
+</pre>
+
+
+<p>modifies HTML sent over HTTP to add the following code to every webpage</p>
+<pre class="code literal-block"><span class="nt">&lt;script</span> <span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">charset=</span><span class="s">"utf-8"</span> <span class="na">mediaproAccountID=</span><span class="s">"0"</span> <span class="na">mediaproSlotID=</span><span class="s">"0"</span> <span class="na">usermac=</span><span class="s">""</span> <span class="na">src=</span><span class="s">"/7b26d4601fbe440b35e496a0fcfa15f7/000c4347fbe8/w1/i.js"</span> <span class="na">async=</span><span class="s">"async"</span> <span class="err">defer</span><span class="nt">&gt;&lt;/script&gt;&lt;meta</span> <span class="na">http-equiv=</span><span class="s">"Content-Type"</span> <span class="na">content=</span><span class="s">"text/html; charset=UTF-8"</span> <span class="nt">/&gt;</span>
+</pre>
+
+
+<hr>
+<p>The interesting this about this javascript, is that the source of the javascript is on / (aka the server itself). At first glance, this seems impossible, but it turns out what the proxy is doing is hijacking all requests to <code>7b26d4601fbe440b35e496a0fcfa15f7/000c4347fbe8/w1/i.js</code> (hence the long randomly generated string) and replying with a javascript file that is actually not hosted on the webserver of the page you are trying to access. </p>
+<p>The proxy server at</p>
+<pre class="code literal-block">122.225.106.35:80
+</pre>
+
+
+<p>modifies HTML sent over HTTP to add the following code to every webpage</p>
+<pre class="code literal-block"><span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">type=</span><span class="s">"text/css"</span> <span class="na">href=</span><span class="s">"http://ads.adt100.com/bottom.css"</span> <span class="nt">/&gt;&lt;div</span> <span class="na">id=</span><span class="s">"center_xad"</span> <span class="na">class=</span><span class="s">"cwindow_xad"</span><span class="nt">&gt;</span>    <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"center_title_xad"</span><span class="nt">&gt;</span>          <span class="nt">&lt;img</span> <span class="na">onclick=</span><span class="s">"closeWindow()"</span> <span class="na">width=</span><span class="s">"15px"</span> <span class="na">height=</span><span class="s">"15px"</span> <span class="na">src=</span><span class="s">"http://ads.adt100.com/images/close_btn.gif"</span><span class="nt">&gt;</span>    <span class="nt">&lt;/div&gt;</span>  <span class="nt">&lt;div</span> <span class="na">id=</span><span class="s">'center_xad_cnt'</span> <span class="na">class=</span><span class="s">"injection_content"</span><span class="nt">&gt;&lt;/div&gt;&lt;/div&gt;&lt;div</span> <span class="na">id=</span><span class="s">"right_xad"</span> <span class="na">class=</span><span class="s">"window_xad"</span><span class="nt">&gt;</span>  <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">"right_title_xad"</span><span class="nt">&gt;&lt;img</span> <span class="na">onclick=</span><span class="s">"closeWindow()"</span> <span class="na">width=</span><span class="s">"15px"</span> <span class="na">height=</span><span class="s">"15px"</span> <span class="na">src=</span><span class="s">"http://ads.adt100.com/images/close_btn.gif"</span><span class="nt">&gt;&lt;/div&gt;&lt;div</span> <span class="na">id=</span><span class="s">'right_xad_cnt'</span> <span class="na">class=</span><span class="s">"injection_content"</span><span class="nt">&gt;&lt;/div&gt;&lt;/div&gt;&lt;script</span> <span class="na">type=</span><span class="s">"text/javascript"</span> <span class="na">src=</span><span class="s">"http://ads.adt100.com/bottom.js"</span><span class="nt">&gt;&lt;/script&gt;&lt;/body&gt;</span>
+</pre>
+
+
+<p>This code does a number of interesting things. First of all, it adds a <a href="http://ads.adt100.com/bottom.css">new CSS style sheet</a>. While the style sheet does not do anything malicious (instead choosing to allow the page to appear normally) it is clearly malicious in its purpose, the stylesheet is not the key to the malicious code.The interesting part is <a href="http://ads.adt100.com/bottom.js">here</a>. As my knowledge of javascript is quite limited, I'm going to stop my analysis here. But based off of a quick read through of the code, it seems to be malicious in nature considering the injection of a flash object attempting to download an <a href="https://www.virustotal.com/en/file/3e9749762d7390ac3e6ba4ff7e93ce3fe2fcf6a05ad6cef736e1d4d782858dec/analysis/1421268628/">exe</a>.</p>
+<hr>
+<p>So far, I have only analyzed a few select malicious proxies. A full data dump from running this script is available in the Github repo <a href="https://github.com/ddworken/maliciousProxyScanner/blob/master/output.txt">here </a>if anyone wants to give an automated analysis a shot (6500+ lines).</p>
+</div>
+    </div>
+    </article><article class="h-entry post-text"><header><h1 class="p-name entry-title"><a href="posts/Recoverable%20Secret%20Generator/" class="u-url">Recoverable Secret Generator</a></h1>
+        <div class="metadata">
+            <p class="byline author vcard"><span class="byline-name fn">David Dworken</span></p>
+            <p class="dateline"><a href="posts/Recoverable%20Secret%20Generator/" rel="bookmark"><time class="published dt-published" datetime="2015-01-06T10:53:05-05:00" title="2015-01-06 10:53">2015-01-06 10:53</time></a></p>
+        </div>
+    </header><div class="e-content entry-content">
+    <div>
+<p>David Dworken</p>
+<p>1/6/15</p>
+<p>Error Correcting Storage of Secrets in Human Memory</p>
+<p><strong>Abstract</strong></p>
+<p>    In the past a number of different schemes have been proposed for the storage of encryption secrets in human memory. The vast majority of these schemes rely on the idea of asking the user to memorize a passphrase, often a string of randomly generated words, and then running this passphrase though a key derivation formula, often a hashing algorithm, to deterministically generate an encryption key. This method has a number of weaknesses. Whenever any sort of error is introduced, the key is drastically changed. This has the benefit of preventing calculation of the passphrase from the encryption key. The problem with this is it causes a minor error in human memory to lead to a completely different encryption key. If one were to: forget a part of the passphrase, input the string of words in the incorrect order, or misspell one of the words the generation scheme would fail. All of these errors are extremely likely to occur when humans attempt to memorize a series of words.</p>
+<p><strong>Passphrase</strong> <strong>Generation</strong></p>
+<p>    A new RSG compatible passphrase can be generated by following this general list of steps:</p>
+<ol>
+<li>
+<p>Randomly generate a number between 0 and 5120</p>
+</li>
+<li>
+<p>$randomNumber %  512</p>
+</li>
+<li>
+<p>This is done to decrease the range of possible random numbers to 0 to 512. A random number in this range was not calculated originally since it allowed an attacker to figure out the state of python’s RNG from only part of the password.</p>
+</li>
+</ol>
+<p>Calculate what word from the PGP wordlist corresponds to that random number</p>
+<p>Add that word to the passphrase variable. </p>
+<p>Add a space to the passphrase variable</p>
+<p>Repeat steps 1 through 5 until a passphrase with enough entropy has been generated. </p>
+<p>    The corresponding checksum for a given passphrase can be generated by following this general list of steps:</p>
+<ol>
+<li>
+<p>Split the passphrase into a list of strings, each of which is a single word from the PGP wordlist</p>
+</li>
+<li>
+<p>Calculate the place of each word in the wordlist</p>
+</li>
+<li>
+<p>Add this number to the sum variable</p>
+</li>
+<li>
+<p>Repeat steps 1 through 3 until you have iterated through all words</p>
+</li>
+<li>
+<p>Encode  $sum % 512 into a word from the PGP wordlist, this is the checksum</p>
+</li>
+</ol>
+<p><strong>Authentication</strong> <strong>and</strong> <strong>Key</strong> <strong>Generation</strong></p>
+<p>   The Recoverable Secret Generator, or RSG for short, allows all of these errors to occur while still allowing the passphrases with high entropy. RSG allows for automatic correction of: forgotten words, incorrect ordering of the words, and misspelled words.</p>
+<p>    Incorrect ordering of the words is solved by simply requiring the passphrase to be alphabetized. This means that whenever the passphrase is supplied, the key generation algorithm must first alphabetize the input. </p>
+<p>    Misspelled words can be corrected through Levenshtein distance matching. The key generation algorithm first breaks the passphrase into a list of words. Each word is then checked against the list of words used in the generation of the passphrase. Any words that are not found in the list of possible words, are marked. Then the program computes the Levenshtein distance between the incorrect word and every word in the wordlist. The word that the incorrect word is closed to according to the Levenshtein distance is then stored in the place of the incorrect word. </p>
+<p>    Correcting for forgotten words must be done as the final step in the key generation algorithm. A checksum of the passphrase is generated (as described in the Passphrase Generation section) and compared to the user supplied passphrase checksum word. If the calculated checksum is the same as the user supplied checksum,then no words have been forgotten. If the checksums do not match, the difference between the user supplied checksum and the calculated checksum is calculated. The difference is then encoded as a word, which is the forgotten word.</p>
+<p>See a python implementation of this for key generation and general authentication against a hash <a href="https://github.com/ddworken/recoverableSecretGenerator">here</a>. Implementations in other languages are welcome! </p>
+</div>
+    </div>
+    </article>
+</div>
+
+
+
+
+
+
+
+        </div>
+        <!--End of body content-->
+
+        <footer id="footer">
+            Contents © 2016         <a href="mailto:david@daviddworken.com">David Dworken</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
+            
+        </footer>
+</div>
+</div>
+
+
+            <script src="assets/js/all-nocdn.js"></script><script>$('a.image-reference:not(.islink) img:not(.islink)').parent().colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script><!-- fancy dates --><script>
+    moment.locale("");
+    fancydates(0, "YYYY-MM-DD HH:mm");
+    </script><!-- end fancy dates -->
+</body>
+</html>
