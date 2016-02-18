@@ -1,0 +1,92 @@
+<!--
+.. title: Using XSScrapy to Scan for XSS Vulnerabilities
+.. slug: using-xsscrapy-to-scan-for-xss-vulnerabilities
+.. date: 2015-02-26 11:10:26 UTC-05:00
+.. tags: 
+.. category: 
+.. link: 
+.. description: 
+.. type: text
+-->
+
+<div class="page">
+    <div class="preview-page">
+    <div class="container">
+      <div class="repository-with-sidebar repo-container with-full-navigation">
+          <div class="repository-content context-loader-container">
+            <div id="readme" class="boxed-group flush clearfix announce instapaper_body md">
+              <div class="markdown-body entry-content">
+<h1></h1>
+<p><a href="#using-xsscrapy-to-scan-for-xss-vulnerabilities"><span class="octicon octicon-link"></span></a>Using XSScrapy to Scan for XSS Vulnerabilities</p>
+<p><a href="https://github.com/DanMcInerney/xsscrapy">XSScrapy</a> is an amazing tool for the aspiring cyber security researcher. Entering the cyber security field used to be challenging and full of hours of wasted research with nothing to show for it. With XSScrapy, that is no longer true. 
+<h4></h4>
+<p><a href="#so-what-is-an-xss-vulnerability"><span class="octicon octicon-link"></span></a>So what is an XSS Vulnerability</p>
+<p>A XSS vulnerability is what happens when a website displays user input without escaping this. If this makes sense to you, continue to the next section.</p>
+<p>A common example of when this would happen is if the website returned the following HTML:</p>
+<div class="highlight highlight-html"><pre>&lt;<span class="pl-ent">a</span> <span class="pl-e">href</span>=<span class="pl-s1"><span class="pl-pds">"</span>[Link to the current page]<span class="pl-pds">"</span></span>&gt;</pre></div>
+<p>So on <code>example.com</code>, this would display:</p>
+<div class="highlight highlight-html"><pre>&lt;<span class="pl-ent">a</span> <span class="pl-e">href</span>=<span class="pl-s1"><span class="pl-pds">"</span>http://example.com/<span class="pl-pds">"</span></span>&gt;</pre></div>
+<p>By loading <code>example.com/&quot;&gt;&lt;script&gt;alert(0)&lt;/script&gt;&lt;&quot;</code>, the  HTML becomes:</p>
+<div class="highlight highlight-html"><pre>&lt;<span class="pl-ent">a</span> <span class="pl-e">href</span>=<span class="pl-s1"><span class="pl-pds">"</span>example.com/<span class="pl-pds">"</span></span>&gt;<span class="pl-s2">&lt;<span class="pl-ent">script</span>&gt;<span class="pl-s3">alert</span>(<span class="pl-c1">0</span>)&lt;/<span class="pl-ent">script</span>&gt;</span>&lt;""&gt;</pre></div>
+<p>Which when indented properly looks like:</p>
+<div class="highlight highlight-html"><pre>&lt;<span class="pl-ent">a</span> <span class="pl-e">href</span>=<span class="pl-s1"><span class="pl-pds">"</span>example.com/<span class="pl-pds">"</span></span>&gt;
+<span class="pl-s2">&lt;<span class="pl-ent">script</span>&gt;</span>
+<span class="pl-s2">    <span class="pl-s3">alert</span>(<span class="pl-c1">0</span>)</span>
+<span class="pl-s2">&lt;/<span class="pl-ent">script</span>&gt;</span>
+&lt;""&gt;</pre></div>
+<p>All of which is valid HTML and will run properly. In this case, we have injected javascript code to display a popup box. While a popup box is not dangerous, the javascript can be used to do a number of other malicious things. For example, the injected javascript could automatically exfiltrate cookies back to an attacker owned server (thus giving the attacker access to the victim's account).</p>
+<h3></h3>
+<p><a href="#so-what-is-xsscrapy"><span class="octicon octicon-link"></span></a>So what is XSScrapy?</p>
+<p>XSScrapy is an XSS scanner written by Dan McInerney in Python. XSScrapy works by using scrapy to create a web spider to download the HTML of all pages on a given domain name. Scrapy finds URLs by automatically following all of the links on the website until it has scanned every single URL. Once the HTML for a page is downloaded, XSScrapy automatically searches the page for XSS vulnerabilities.</p>
+<p>This is done by looking for a number of common injection points and injecting the string <code>9zqjxel'&quot;(){}&lt;x&gt;:9zqjxel;9</code>. The important part of this string is <code>'&quot;(){}&lt;x&gt;:;</code>. This string contains pretty much every possibly &quot;dangerous&quot; character. So if the HTML is rendered without those characters being escaped, it is likely that there is an XSS vulnerability.</p>
+<h3></h3>
+<p><a href="#ok-lets-start-scanning"><span class="octicon octicon-link"></span></a>Ok, let's start scanning!</p>
+<p>First, follow the installation instructions <a href="https://github.com/DanMcInerney/xsscrapy/blob/master/README.md">here</a>. Once you have done that, let's find a website to scan.</p>
+<p><strong>Never</strong> run XSScrapy against a domain that you do not own or have permission to penetration test. So if you are looking for a website to practice your new found skills on, try any website that offers a bug bounty. Look on websites like Bug Crowd, Hacker One, or CrowdCurity to find websites that allow for automated scanning.</p>
+<p>Once you found one, run:</p>
+<p><code>xsscrapy.py -u http://example.com</code></p>
+<p>Once the scan is finished, let's look through the <code>xsscrapy-vulns.txt</code> file. So run <code>cat xsscrapy-vulns.txt</code>. (Assuming the program found some potential vulnerabilities) This should give you a nice list of vulnerabilities in the form of:</p>
+<pre><code>URL: [URL of the Vulnerability]
+response URL: [URL of the Vulnerability]
+Unfiltered: [The code causing the problem]
+Payload: [What was injected to trigger the problem]
+Type: [Type of Vulnerability]
+Injection point: [Where the payload was injected]
+Possible payloads: [A suggested payload to exploit: Note this is often incorrect]
+Line: [The problematic line of HTML code]
+`&lt;/pre&gt;
+
+So now lets go through an example vulnerability report line by line. 
+
+&lt;pre&gt;`URL: www.example.com/?q=9zqjxxe'&quot;(){}&lt;x&gt;:9zqjxxe;9
+response URL: www.example.com/?q=9zqjxxe'&quot;(){}&lt;x&gt;:9zqjxxe;9
+Unfiltered: '&quot;(){}&lt;x&gt;
+Payload: 9zqjxxe'&quot;(){}&lt;x&gt;:9zqjxxe;9
+Type: form
+Injection point: q
+Possible payloads: x&quot;/onmouseover=prompt(9)/&quot;, x&quot;x&gt;&lt;svG/onLoad=prompt(9)&gt;, x&quot; onmouseover=prompt(9) &quot;
+Line:  &lt;input type=&quot;hidden&quot; name=&quot;q&quot; value=&quot;9zqjxgm'&quot;(){}&lt;x&gt;:9zqjxgm;9
+`&lt;/pre&gt;
+
+### 
+[&lt;span class=&quot;octicon octicon-link&quot;&gt;&lt;/span&gt;](#developing-the-exploit-if-type--form)Developing the Exploit (if Type == form)
+
+Take the URL from the first line and load it in your browser `www.example.com/?q=9zqjxxe'&quot;(){}&lt;x&gt;:9zqjxxe;9`
+
+Now modify the URL to `www.example.com/?q=`
+
+Then look at the the last line of XSScrapy's vulnerability report: 
+
+&lt;pre&gt;`Line:  &lt;input type=&quot;hidden&quot; name=&quot;q&quot; value=&quot;9zqjxgm'&quot;(){}&lt;x&gt;:9zqjxgm;9
+</code></pre>
+<p>So based off of the above except from the HTML, we can tell that we want to first add a <code>&quot;</code> to escape from the value variable followed by a <code>&gt;</code> to escape out into the HTML. Together, these two characters will get all following text to be interpreted as HTML. So now that we have that done, we simply tack a standard <code>&lt;script&gt;alert(0)&lt;/script&gt;</code> onto the end of <code>&quot;&gt;</code> making our final input <code>&quot;&gt;&lt;script&gt;alert(0)&lt;/script&gt;</code>. So now we have our payload.</p>
+<p>Take that payload and add it on to the URL we got earlier (<code>www.example.com/?q=</code>) to make <code>www.example.com/?q=&quot;&gt;&lt;script&gt;alert(0)&lt;/script&gt;</code>. Then load that URL, and you should get a pop up box displaying <code>0</code>!</p>
+<p>Now that you have gotten this far, the final step is to report the vulnerability to the website. Create an account on what ever bug bounty website they use and submit it. If you've gotten this far, then Congratulations! You've reported your first vulnerability.</p>
+<pre><code>          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+  </div>
+  </div></p>
