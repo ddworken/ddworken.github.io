@@ -8,7 +8,7 @@
 <link href="assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
 <link rel="alternate" type="application/rss+xml" title="RSS" href="rss.xml">
 <link rel="canonical" href="http://blog.daviddworken.com/">
-<!--[if lt IE 9]><script src="assets/js/html5.js"></script><![endif]--><link rel="prefetch" href="posts/website-hosting-with-kbfs/" type="text/html">
+<!--[if lt IE 9]><script src="assets/js/html5.js"></script><![endif]--><link rel="prefetch" href="posts/building-signal-desktop-in-docker/" type="text/html">
 </head>
 <body>
 <a href="#content" class="sr-only sr-only-focusable">Skip to main content</a>
@@ -60,7 +60,24 @@
             
 
 <div class="postindex">
-    <article class="h-entry post-text"><header><h1 class="p-name entry-title"><a href="posts/website-hosting-with-kbfs/" class="u-url">Website Hosting with KBFS</a></h1>
+    <article class="h-entry post-text"><header><h1 class="p-name entry-title"><a href="posts/building-signal-desktop-in-docker/" class="u-url">Building Signal Desktop In Docker (And Skipping The Line for the Beta!)</a></h1>
+        <div class="metadata">
+            <p class="byline author vcard"><span class="byline-name fn">David Dworken</span></p>
+            <p class="dateline"><a href="posts/building-signal-desktop-in-docker/" rel="bookmark"><time class="published dt-published" datetime="2016-02-26T23:03:54-05:00" title="2016-02-26 23:03">2016-02-26 23:03</time></a></p>
+        </div>
+    </header><div class="e-content entry-content">
+    <div>
+<p>Be warned, Signal Desktop is in a closed beta. This program pulls from master and builds Signal Desktop so is in no way guaranteed to work or to be secure. <strong>Use at your own risk.</strong> </p>
+<p>Why? Signal Desktop is in beta and there are over 10,000 people ahead of me in line to join the beta. Open Whisper Systems wants me to invite people in order to jump ahead in line, which I'd rather not do so this is my solution.</p>
+<p>First, make sure you have Docker installed. Then <code>git clone https://github.com/ddworken/signalDesktopDocker.git</code>. To build Signal Desktop: <code>docker build -t signal .</code>. </p>
+<p>Currently this Dockerfile is setup to build Signal Desktop then set it up to work with NW but the NW version is stateless (so you have to login every time you use it) so it is recommended to import it as a Chrome extension. To do so, run the container: <code>docker run -ti --rm -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix --cidfile=temp.cid signal</code>. Then <code>cat temp.cid</code> to get the ID of the container. Then we need to copy the extension so <code>docker cp [Container ID]:/SignalDesktop.zip ./</code>. Then unzip SignalDesktop.zip into a folder. Open <code>chrome://extensions</code> in Chrome and click on "Load unpacked extension..." to load the extension. </p>
+<p>Make sure to re-build the container periodically to keep Signal Desktop up to date. </p>
+<p>I uploaded a copy of Signal Desktop to my KBFS folder <a href="https://keybase.pub/dworken/SignalDesktop.zip">here</a>. </p>
+<p>To view the Dockerfile, go <a href="https://github.com/ddworken/signalDesktopDocker">here</a>. </p>
+<p>Credit to Tim Taubert for his <a href="https://timtaubert.de/blog/2016/01/build-your-own-signal-desktop/">original post</a> on building Signal Desktop. </p>
+</div>
+    </div>
+    </article><article class="h-entry post-text"><header><h1 class="p-name entry-title"><a href="posts/website-hosting-with-kbfs/" class="u-url">Website Hosting with KBFS</a></h1>
         <div class="metadata">
             <p class="byline author vcard"><span class="byline-name fn">David Dworken</span></p>
             <p class="dateline"><a href="posts/website-hosting-with-kbfs/" rel="bookmark"><time class="published dt-published" datetime="2016-02-18T17:56:33-05:00" title="2016-02-18 17:56">2016-02-18 17:56</time></a></p>
