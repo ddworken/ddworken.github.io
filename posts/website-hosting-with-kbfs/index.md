@@ -22,4 +22,4 @@ DEPLOY_COMMANDS = {
  }
 ```
 
-So now when I run nikola deploy it will automatically deploy to both Github Pages ([ddworken.github.io](https://ddworken.github.io)) and KBFS ([dworken.keybase.pub/blog](https://dworken.keybase.pub/blog)). 
+So now when I run nikola deploy it will automatically deploy to both Github Pages ([ddworken.github.io](https://ddworken.github.io)) and KBFS ([dworken.keybase.pub/blog](https://dworken.keybase.pub/blog/index.html)). 
