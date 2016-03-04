@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>David Dworken's Blog</title><link>http://blog.daviddworken.com/</link><description>David Dworken's Blog</description><atom:link href="http://blog.daviddworken.com/rss.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Tue, 01 Mar 2016 23:48:19 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Building Signal Desktop In Docker (And Skipping The Line for the Beta!)</title><link>http://blog.daviddworken.com/posts/building-signal-desktop-in-docker/</link><dc:creator>David Dworken</dc:creator><description>&lt;div&gt;&lt;p&gt;Be warned, Signal Desktop is in a closed beta. This program pulls from master and builds Signal Desktop so is in no way guaranteed to work or to be secure. &lt;strong&gt;Use at your own risk.&lt;/strong&gt; &lt;/p&gt;
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/"><channel><title>David Dworken's Blog</title><link>http://blog.daviddworken.com/</link><description>David Dworken's Blog</description><atom:link href="http://blog.daviddworken.com/rss.xml" type="application/rss+xml" rel="self"></atom:link><language>en</language><lastBuildDate>Fri, 04 Mar 2016 21:43:31 GMT</lastBuildDate><generator>http://getnikola.com/</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Simple Image Steganography</title><link>http://blog.daviddworken.com/posts/simple-image-steganography/</link><dc:creator>David Dworken</dc:creator><description>&lt;div&gt;&lt;p&gt;StegIm is a simple program for image steganography. For example, I encoded the phrase &lt;code&gt;Hello world!!!&lt;/code&gt; into &lt;a href="http://blog.daviddworken.com/tree.png"&gt;tree.png&lt;/a&gt; to create &lt;a href="http://blog.daviddworken.com/encodedTree.png"&gt;encodedTree.png&lt;/a&gt;. When looking at the below images it is impossible to tell the difference between them despite additional data being hidden in the second one. &lt;/p&gt;
+&lt;p&gt;&lt;img alt="tree.png" src="http://blog.daviddworken.com/tree.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="encodedTree.png" src="http://blog.daviddworken.com/encodedTree.png"&gt;&lt;/p&gt;
+&lt;p&gt;Source is available on Github &lt;a href="https://github.com/ddworken/StegIm"&gt;here&lt;/a&gt;. &lt;/p&gt;&lt;/div&gt;</description><guid>http://blog.daviddworken.com/posts/simple-image-steganography/</guid><pubDate>Fri, 04 Mar 2016 21:38:42 GMT</pubDate></item><item><title>Building Signal Desktop In Docker (And Skipping The Line for the Beta!)</title><link>http://blog.daviddworken.com/posts/building-signal-desktop-in-docker/</link><dc:creator>David Dworken</dc:creator><description>&lt;div&gt;&lt;p&gt;Be warned, Signal Desktop is in a closed beta. This program pulls from master and builds Signal Desktop so is in no way guaranteed to work or to be secure. &lt;strong&gt;Use at your own risk.&lt;/strong&gt; &lt;/p&gt;
 &lt;p&gt;Why? Signal Desktop is in beta and there are over 10,000 people ahead of me in line to join the beta. Open Whisper Systems wants me to invite people in order to jump ahead in line, which I'd rather not do so this is my solution.&lt;/p&gt;
 &lt;p&gt;First, make sure you have Docker installed. Then &lt;code&gt;git clone https://github.com/ddworken/signalDesktopDocker.git&lt;/code&gt;. To build Signal Desktop: &lt;code&gt;docker build -t signal .&lt;/code&gt;. &lt;/p&gt;
 &lt;p&gt;Currently this Dockerfile is setup to build Signal Desktop then set it up to work with NW but the NW version is stateless (so you have to login every time you use it) so it is recommended to import it as a Chrome extension. To do so, run the container: &lt;code&gt;docker run -ti --rm -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix --cidfile=temp.cid signal&lt;/code&gt;. Then &lt;code&gt;cat temp.cid&lt;/code&gt; to get the ID of the container. Then we need to copy the extension so &lt;code&gt;docker cp [Container ID]:/SignalDesktop.zip ./&lt;/code&gt;. Then unzip SignalDesktop.zip into a folder. Open &lt;code&gt;chrome://extensions&lt;/code&gt; in Chrome and click on "Load unpacked extension..." to load the extension. &lt;/p&gt;
@@ -220,49 +223,4 @@ Then look at the the last line of XSScrapy's vulnerability report:
 
 &lt;p&gt;This code does a number of interesting things. First of all, it adds a &lt;a href="http://ads.adt100.com/bottom.css"&gt;new CSS style sheet&lt;/a&gt;. While the style sheet does not do anything malicious (instead choosing to allow the page to appear normally) it is clearly malicious in its purpose, the stylesheet is not the key to the malicious code.The interesting part is &lt;a href="http://ads.adt100.com/bottom.js"&gt;here&lt;/a&gt;. As my knowledge of javascript is quite limited, I'm going to stop my analysis here. But based off of a quick read through of the code, it seems to be malicious in nature considering the injection of a flash object attempting to download an &lt;a href="https://www.virustotal.com/en/file/3e9749762d7390ac3e6ba4ff7e93ce3fe2fcf6a05ad6cef736e1d4d782858dec/analysis/1421268628/"&gt;exe&lt;/a&gt;.&lt;/p&gt;
 &lt;hr&gt;
-&lt;p&gt;So far, I have only analyzed a few select malicious proxies. A full data dump from running this script is available in the Github repo &lt;a href="https://github.com/ddworken/maliciousProxyScanner/blob/master/output.txt"&gt;here &lt;/a&gt;if anyone wants to give an automated analysis a shot (6500+ lines).&lt;/p&gt;&lt;/div&gt;</description><guid>http://blog.daviddworken.com/posts/scanning-for-malicious-proxies/</guid><pubDate>Mon, 12 Jan 2015 16:00:39 GMT</pubDate></item><item><title>Recoverable Secret Generator</title><link>http://blog.daviddworken.com/posts/Recoverable Secret Generator/</link><dc:creator>David Dworken</dc:creator><description>&lt;div&gt;&lt;p&gt;David Dworken&lt;/p&gt;
-&lt;p&gt;1/6/15&lt;/p&gt;
-&lt;p&gt;Error Correcting Storage of Secrets in Human Memory&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Abstract&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;    In the past a number of different schemes have been proposed for the storage of encryption secrets in human memory. The vast majority of these schemes rely on the idea of asking the user to memorize a passphrase, often a string of randomly generated words, and then running this passphrase though a key derivation formula, often a hashing algorithm, to deterministically generate an encryption key. This method has a number of weaknesses. Whenever any sort of error is introduced, the key is drastically changed. This has the benefit of preventing calculation of the passphrase from the encryption key. The problem with this is it causes a minor error in human memory to lead to a completely different encryption key. If one were to: forget a part of the passphrase, input the string of words in the incorrect order, or misspell one of the words the generation scheme would fail. All of these errors are extremely likely to occur when humans attempt to memorize a series of words.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Passphrase&lt;/strong&gt; &lt;strong&gt;Generation&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;    A new RSG compatible passphrase can be generated by following this general list of steps:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;Randomly generate a number between 0 and 5120&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;$randomNumber %  512&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;This is done to decrease the range of possible random numbers to 0 to 512. A random number in this range was not calculated originally since it allowed an attacker to figure out the state of python’s RNG from only part of the password.&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;Calculate what word from the PGP wordlist corresponds to that random number&lt;/p&gt;
-&lt;p&gt;Add that word to the passphrase variable. &lt;/p&gt;
-&lt;p&gt;Add a space to the passphrase variable&lt;/p&gt;
-&lt;p&gt;Repeat steps 1 through 5 until a passphrase with enough entropy has been generated. &lt;/p&gt;
-&lt;p&gt;    The corresponding checksum for a given passphrase can be generated by following this general list of steps:&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;
-&lt;p&gt;Split the passphrase into a list of strings, each of which is a single word from the PGP wordlist&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Calculate the place of each word in the wordlist&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Add this number to the sum variable&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Repeat steps 1 through 3 until you have iterated through all words&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Encode  $sum % 512 into a word from the PGP wordlist, this is the checksum&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;&lt;strong&gt;Authentication&lt;/strong&gt; &lt;strong&gt;and&lt;/strong&gt; &lt;strong&gt;Key&lt;/strong&gt; &lt;strong&gt;Generation&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;   The Recoverable Secret Generator, or RSG for short, allows all of these errors to occur while still allowing the passphrases with high entropy. RSG allows for automatic correction of: forgotten words, incorrect ordering of the words, and misspelled words.&lt;/p&gt;
-&lt;p&gt;    Incorrect ordering of the words is solved by simply requiring the passphrase to be alphabetized. This means that whenever the passphrase is supplied, the key generation algorithm must first alphabetize the input. &lt;/p&gt;
-&lt;p&gt;    Misspelled words can be corrected through Levenshtein distance matching. The key generation algorithm first breaks the passphrase into a list of words. Each word is then checked against the list of words used in the generation of the passphrase. Any words that are not found in the list of possible words, are marked. Then the program computes the Levenshtein distance between the incorrect word and every word in the wordlist. The word that the incorrect word is closed to according to the Levenshtein distance is then stored in the place of the incorrect word. &lt;/p&gt;
-&lt;p&gt;    Correcting for forgotten words must be done as the final step in the key generation algorithm. A checksum of the passphrase is generated (as described in the Passphrase Generation section) and compared to the user supplied passphrase checksum word. If the calculated checksum is the same as the user supplied checksum,then no words have been forgotten. If the checksums do not match, the difference between the user supplied checksum and the calculated checksum is calculated. The difference is then encoded as a word, which is the forgotten word.&lt;/p&gt;
-&lt;p&gt;See a python implementation of this for key generation and general authentication against a hash &lt;a href="https://github.com/ddworken/recoverableSecretGenerator"&gt;here&lt;/a&gt;. Implementations in other languages are welcome! &lt;/p&gt;&lt;/div&gt;</description><guid>http://blog.daviddworken.com/posts/Recoverable Secret Generator/</guid><pubDate>Tue, 06 Jan 2015 15:53:05 GMT</pubDate></item></channel></rss>
+&lt;p&gt;So far, I have only analyzed a few select malicious proxies. A full data dump from running this script is available in the Github repo &lt;a href="https://github.com/ddworken/maliciousProxyScanner/blob/master/output.txt"&gt;here &lt;/a&gt;if anyone wants to give an automated analysis a shot (6500+ lines).&lt;/p&gt;&lt;/div&gt;</description><guid>http://blog.daviddworken.com/posts/scanning-for-malicious-proxies/</guid><pubDate>Mon, 12 Jan 2015 16:00:39 GMT</pubDate></item></channel></rss>

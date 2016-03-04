@@ -6,7 +6,7 @@
                         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
  <url>
   <loc>http://blog.daviddworken.com/</loc>
-  <lastmod>2016-02-22</lastmod>
+  <lastmod>2016-03-04</lastmod>
  </url>
  <url>
   <loc>http://blog.daviddworken.com/2015/</loc>
@@ -23,6 +23,10 @@
  <url>
   <loc>http://blog.daviddworken.com/categories/</loc>
   <lastmod>2016-02-18</lastmod>
+ </url>
+ <url>
+  <loc>http://blog.daviddworken.com/index-1.html</loc>
+  <lastmod>2016-03-04</lastmod>
  </url>
  <url>
   <loc>http://blog.daviddworken.com/posts/Recoverable Secret Generator/</loc>
@@ -51,6 +55,10 @@
  <url>
   <loc>http://blog.daviddworken.com/posts/scanning-for-malicious-proxies/</loc>
   <lastmod>2016-02-18</lastmod>
+ </url>
+ <url>
+  <loc>http://blog.daviddworken.com/posts/simple-image-steganography/</loc>
+  <lastmod>2016-03-04</lastmod>
  </url>
  <url>
   <loc>http://blog.daviddworken.com/posts/slope-field-generator/</loc>
