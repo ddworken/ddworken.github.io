@@ -6,7 +6,7 @@
                         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
  <url>
   <loc>http://blog.daviddworken.com/</loc>
-  <lastmod>2016-03-04</lastmod>
+  <lastmod>2016-04-17</lastmod>
  </url>
  <url>
   <loc>http://blog.daviddworken.com/2015/</loc>
@@ -26,7 +26,7 @@
  </url>
  <url>
   <loc>http://blog.daviddworken.com/index-1.html</loc>
-  <lastmod>2016-03-04</lastmod>
+  <lastmod>2016-04-17</lastmod>
  </url>
  <url>
   <loc>http://blog.daviddworken.com/posts/Recoverable Secret Generator/</loc>
@@ -43,6 +43,10 @@
  <url>
   <loc>http://blog.daviddworken.com/posts/building-signal-desktop-in-docker/</loc>
   <lastmod>2016-02-26</lastmod>
+ </url>
+ <url>
+  <loc>http://blog.daviddworken.com/posts/csv-injection-in-businessubercom/</loc>
+  <lastmod>2016-04-17</lastmod>
  </url>
  <url>
   <loc>http://blog.daviddworken.com/posts/kbfs-on-linux/</loc>
@@ -71,5 +75,13 @@
  <url>
   <loc>http://blog.daviddworken.com/posts/website-hosting-with-kbfs/</loc>
   <lastmod>2016-02-18</lastmod>
+ </url>
+ <url>
+  <loc>http://blog.daviddworken.com/posts/xss-in-getrushubercom/</loc>
+  <lastmod>2016-04-17</lastmod>
+ </url>
+ <url>
+  <loc>http://blog.daviddworken.com/posts/xss-in-pypi-and-uber/</loc>
+  <lastmod>2016-04-17</lastmod>
  </url>
 </urlset>
