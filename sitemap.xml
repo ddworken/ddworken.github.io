@@ -1,87 +1,128 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset
     xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+    xmlns:xhtml="http://www.w3.org/1999/xhtml"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
                         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
  <url>
   <loc>http://blog.daviddworken.com/</loc>
-  <lastmod>2016-04-17</lastmod>
+  <lastmod>2017-03-10T04:33:00Z</lastmod>
  </url>
  <url>
   <loc>http://blog.daviddworken.com/2015/</loc>
-  <lastmod>2016-02-18</lastmod>
+  <lastmod>2016-06-08T20:43:00Z</lastmod>
  </url>
  <url>
   <loc>http://blog.daviddworken.com/2016/</loc>
-  <lastmod>2016-02-18</lastmod>
+  <lastmod>2016-06-08T20:43:00Z</lastmod>
+ </url>
+ <url>
+  <loc>http://blog.daviddworken.com/2017/</loc>
+  <lastmod>2017-03-10T04:33:00Z</lastmod>
  </url>
  <url>
   <loc>http://blog.daviddworken.com/archive.html</loc>
-  <lastmod>2016-03-03</lastmod>
+  <lastmod>2017-03-10T04:33:00Z</lastmod>
  </url>
  <url>
   <loc>http://blog.daviddworken.com/categories/</loc>
-  <lastmod>2016-02-18</lastmod>
+  <lastmod>2016-06-08T20:43:00Z</lastmod>
  </url>
  <url>
   <loc>http://blog.daviddworken.com/index-1.html</loc>
-  <lastmod>2016-04-17</lastmod>
+  <lastmod>2017-03-10T04:33:00Z</lastmod>
+ </url>
+ <url>
+  <loc>http://blog.daviddworken.com/index-2.html</loc>
+  <lastmod>2017-03-10T04:33:00Z</lastmod>
  </url>
  <url>
   <loc>http://blog.daviddworken.com/posts/Recoverable Secret Generator/</loc>
-  <lastmod>2016-02-18</lastmod>
+  <lastmod>2016-06-08T20:43:00Z</lastmod>
+ </url>
+ <url>
+  <loc>http://blog.daviddworken.com/posts/Recoverable Secret Generator/Recoverable Secret Generator/</loc>
+  <lastmod>2016-06-08T20:43:00Z</lastmod>
  </url>
  <url>
   <loc>http://blog.daviddworken.com/posts/abusing-googles-unlimited-photo-storage-for-fun-and-profit/</loc>
-  <lastmod>2016-02-18</lastmod>
+  <lastmod>2016-06-08T20:43:00Z</lastmod>
+ </url>
+ <url>
+  <loc>http://blog.daviddworken.com/posts/abusing-googles-unlimited-photo-storage-for-fun-and-profit/abusing-googles-unlimited-photo-storage-for-fun-and-profit/</loc>
+  <lastmod>2016-06-08T20:43:00Z</lastmod>
  </url>
  <url>
   <loc>http://blog.daviddworken.com/posts/bug-bounties-list/</loc>
-  <lastmod>2016-02-18</lastmod>
+  <lastmod>2016-06-08T20:43:00Z</lastmod>
  </url>
  <url>
-  <loc>http://blog.daviddworken.com/posts/building-signal-desktop-in-docker/</loc>
-  <lastmod>2016-02-26</lastmod>
+  <loc>http://blog.daviddworken.com/posts/bug-bounties-list/bug-bounties-list/</loc>
+  <lastmod>2016-06-08T20:43:00Z</lastmod>
  </url>
  <url>
-  <loc>http://blog.daviddworken.com/posts/csv-injection-in-businessubercom/</loc>
-  <lastmod>2016-04-17</lastmod>
+  <loc>http://blog.daviddworken.com/posts/building-signal-desktop-in-docker/building-signal-desktop-in-docker/</loc>
+  <lastmod>2016-06-08T20:43:00Z</lastmod>
+ </url>
+ <url>
+  <loc>http://blog.daviddworken.com/posts/csv-injection-in-businessubercom/csv-injection-in-businessubercom/</loc>
+  <lastmod>2016-06-08T20:43:00Z</lastmod>
  </url>
  <url>
   <loc>http://blog.daviddworken.com/posts/kbfs-on-linux/</loc>
-  <lastmod>2016-02-18</lastmod>
+  <lastmod>2016-06-08T20:43:00Z</lastmod>
+ </url>
+ <url>
+  <loc>http://blog.daviddworken.com/posts/kbfs-on-linux/kbfs-on-linux/</loc>
+  <lastmod>2016-06-08T20:43:00Z</lastmod>
  </url>
  <url>
   <loc>http://blog.daviddworken.com/posts/pywmata/</loc>
-  <lastmod>2016-02-18</lastmod>
+  <lastmod>2016-06-08T20:43:00Z</lastmod>
+ </url>
+ <url>
+  <loc>http://blog.daviddworken.com/posts/pywmata/pywmata/</loc>
+  <lastmod>2016-06-08T20:43:00Z</lastmod>
  </url>
  <url>
   <loc>http://blog.daviddworken.com/posts/scanning-for-malicious-proxies/</loc>
-  <lastmod>2016-02-18</lastmod>
+  <lastmod>2016-06-08T20:43:00Z</lastmod>
  </url>
  <url>
-  <loc>http://blog.daviddworken.com/posts/simple-image-steganography/</loc>
-  <lastmod>2016-03-04</lastmod>
+  <loc>http://blog.daviddworken.com/posts/scanning-for-malicious-proxies/scanning-for-malicious-proxies/</loc>
+  <lastmod>2016-06-08T20:43:00Z</lastmod>
+ </url>
+ <url>
+  <loc>http://blog.daviddworken.com/posts/simple-image-steganography/simple-image-steganography/</loc>
+  <lastmod>2016-06-08T20:43:00Z</lastmod>
  </url>
  <url>
   <loc>http://blog.daviddworken.com/posts/slope-field-generator/</loc>
-  <lastmod>2016-02-18</lastmod>
+  <lastmod>2016-06-08T20:43:00Z</lastmod>
+ </url>
+ <url>
+  <loc>http://blog.daviddworken.com/posts/slope-field-generator/slope-field-generator/</loc>
+  <lastmod>2016-06-08T20:43:00Z</lastmod>
  </url>
  <url>
   <loc>http://blog.daviddworken.com/posts/using-xsscrapy-to-scan-for-xss-vulnerabilities/</loc>
-  <lastmod>2016-02-18</lastmod>
+  <lastmod>2016-06-08T20:43:00Z</lastmod>
  </url>
  <url>
-  <loc>http://blog.daviddworken.com/posts/website-hosting-with-kbfs/</loc>
-  <lastmod>2016-02-18</lastmod>
+  <loc>http://blog.daviddworken.com/posts/website-hosting-with-kbfs/website-hosting-with-kbfs/</loc>
+  <lastmod>2016-06-08T20:43:00Z</lastmod>
  </url>
  <url>
-  <loc>http://blog.daviddworken.com/posts/xss-in-getrushubercom/</loc>
-  <lastmod>2016-04-17</lastmod>
+  <loc>http://blog.daviddworken.com/posts/xss-and-sqli-scanning-with-mitmproxy/</loc>
+  <lastmod>2017-03-10T04:33:00Z</lastmod>
  </url>
  <url>
-  <loc>http://blog.daviddworken.com/posts/xss-in-pypi-and-uber/</loc>
-  <lastmod>2016-04-17</lastmod>
+  <loc>http://blog.daviddworken.com/posts/xss-in-getrushubercom/xss-in-getrushubercom/</loc>
+  <lastmod>2016-06-08T20:43:00Z</lastmod>
+ </url>
+ <url>
+  <loc>http://blog.daviddworken.com/posts/xss-in-pypi-and-uber/xss-in-pypi-and-uber/</loc>
+  <lastmod>2016-06-08T20:43:00Z</lastmod>
  </url>
 </urlset>

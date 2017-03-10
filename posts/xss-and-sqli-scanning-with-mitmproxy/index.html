@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# " lang="en">
+<head>
+<meta charset="utf-8">
+<base href="http://blog.daviddworken.com/posts/xss-and-sqli-scanning-with-mitmproxy/">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>XSS and SQLi Scanning with mitmproxy | David Dworken's Blog</title>
+<link href="../../assets/css/all-nocdn.css" rel="stylesheet" type="text/css">
+<link rel="alternate" type="application/rss+xml" title="RSS" href="../../rss.xml">
+<link rel="canonical" href="http://blog.daviddworken.com/posts/xss-and-sqli-scanning-with-mitmproxy/">
+<!--[if lt IE 9]><script src="../../assets/js/html5.js"></script><![endif]--><meta name="author" content="David Dworken">
+<link rel="prev" href="../xss-in-pypi-and-uber/xss-in-pypi-and-uber/" title="XSS in pypi (and Uber!)" type="text/html">
+<meta property="og:site_name" content="David Dworken's Blog">
+<meta property="og:title" content="XSS and SQLi Scanning with mitmproxy">
+<meta property="og:url" content="http://blog.daviddworken.com/posts/xss-and-sqli-scanning-with-mitmproxy/">
+<meta property="og:description" content="As of last week, mitmproxy now has built in support for detecting cross site scripting and SQL injection vulnerabilities. To have mitmproxy automatically scan pages for XSS and SQLi vulnerabilities, s">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2017-03-08T21:32:04-05:00">
+</head>
+<body>
+<a href="#content" class="sr-only sr-only-focusable">Skip to main content</a>
+
+<!-- Menubar -->
+
+<nav class="navbar navbar-inverse navbar-static-top"><div class="container">
+<!-- This keeps the margins nice -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-navbar" aria-controls="bs-navbar" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="http://blog.daviddworken.com/">
+
+                <span id="blog-title">David Dworken's Blog</span>
+            </a>
+        </div>
+<!-- /.navbar-header -->
+        <div class="collapse navbar-collapse" id="bs-navbar" aria-expanded="false">
+            <ul class="nav navbar-nav">
+<li>
+<a href="../../archive.html">Archive</a>
+                </li>
+<li>
+<a href="../../categories/index.html">Tags</a>
+                </li>
+<li>
+<a href="../../rss.xml">RSS feed</a>
+
+                
+            </li>
+</ul>
+<ul class="nav navbar-nav navbar-right">
+<li>
+    <a href="index.md" id="sourcelink">Source</a>
+    </li>
+
+                
+            </ul>
+</div>
+<!-- /.navbar-collapse -->
+    </div>
+<!-- /.container -->
+</nav><!-- End of Menubar --><div class="container" id="content" role="main">
+    <div class="body-content">
+        <!--Body content-->
+        <div class="row">
+            
+            
+<article class="post-text h-entry hentry postpage" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title" itemprop="headline name"><a href="." class="u-url">XSS and SQLi Scanning with mitmproxy</a></h1>
+
+        <div class="metadata">
+            <p class="byline author vcard"><span class="byline-name fn">David Dworken</span></p>
+            <p class="dateline"><a href="." rel="bookmark"><time class="published dt-published" datetime="2017-03-08T21:32:04-05:00" itemprop="datePublished" title="2017-03-08 21:32">2017-03-08 21:32</time></a></p>
+            
+        <p class="sourceline"><a href="index.md" id="sourcelink">Source</a></p>
+
+        </div>
+        
+
+    </header><div class="e-content entry-content" itemprop="articleBody text">
+    <div>
+<p>As of <a href="https://github.com/mitmproxy/mitmproxy/pull/1907">last week</a>, <a href="https://mitmproxy.org/">mitmproxy</a> now has built in support for detecting cross site scripting and SQL injection vulnerabilities. To have mitmproxy automatically scan pages for XSS and SQLi vulnerabilities, simple run it with the included <code>xss_scanner.py</code> script like so: </p>
+<p><code>mitmproxy -s xss_scanner.py</code></p>
+<p>From there, it will run the <code>xss.py</code> script on every page that you visit through mitmproxy's proxy. It looks for vulnerabilities in the page by injecting a payload, <code>1029zxcs'd"ao&lt;ac&gt;so[sb]po(pc)se;sl/bsl\3847asd3847asd</code>, into four different places: </p>
+<ol>
+<li>The end of the URL. For example, the URL <code>https://example.com</code> is turned into <code>https://example.com/1029zxcs'd"ao&lt;ac&gt;so[sb]po(pc)se;sl/bsl\3847asd3847asd</code>. This is generally effective at finding XSS vulnerabilities that involve pages including the current URL somewhere in the page. </li>
+<li>The referer header. A lot of the time websites will have a built in "back" button (for example on 404 pages) that can lead to XSS vulnerabilities. </li>
+<li>The user agent. Often times pages will include user agents in the HTML as debugging information for any errors. </li>
+<li>Queries. This is the broadest of the categories, but some of the most common examples of an XSS from injecting into the query string are search bars or usernames. </li>
+</ol>
+<p>The script then looks for those strings in the webpages and checks whether or not certain characters are escaped. For example, if <code>&gt;</code>, <code>&gt;</code>, and <code>"</code> are not being escaped and the HTML contains something like <code>&lt;img src="https://example.com/PAYLOAD"&gt;</code> then there would be an XSS vulnerability through injecting <code>"&gt;&lt;script&gt;alert(0)&lt;/script&gt;</code>. In addition, the script also looks for script URLs pointed to unclaimed URLs (for example <code>&lt;script src="https://unclaimedDomain.com"&gt;&lt;/script&gt;</code>. </p>
+<p>The script can detect over a half dozen different ways of injecting Javascript payloads. Whenever it finds a way of injecting Javascript, it displays a report to the mitmproxy console with all of the information needed to exploit the XSS vulnerability: </p>
+<p><img alt="Detected XSS Vulnerability" src="https://github.com/mitmproxy/mitmproxy/blob/c77b091e4228a20d0bc239d9b9009c92ecd60668/mitmproxy/addons/mitmXSS/images/xssQuery.png?raw=true"></p>
+<p>It also can detect SQLi through looking for SQL errors that appear in a page after injection of the payload. This is done using the regexes included in <a href="https://github.com/stamparm/DSSS">Damn Small SQLi Scanner</a>. </p>
+<p>One huge advantage to having a XSS and SQLi scanner integrated with mitmproxy is that mitmproxy has access to your cookies, so all requests are automatically made with the correct cookies for each website. </p>
+<p>This is the first step in building out a scanning interface for mitmproxy and is going to be built upon over time to add more robust detection, better outputs, and automatic spidering. In addition, I'm currently working on building a CSRF scanner to include in the script. See the <a href="https://github.com/mitmproxy/mitmproxy/pull/1907/files">code</a> for more information. </p>
+</div>
+    </div>
+    <aside class="postpromonav"><nav><ul class="pager hidden-print">
+<li class="previous">
+                <a href="../xss-in-pypi-and-uber/xss-in-pypi-and-uber/" rel="prev" title="XSS in pypi (and Uber!)">Previous post</a>
+            </li>
+        </ul></nav></aside></article>
+</div>
+        <!--End of body content-->
+
+        <footer id="footer">
+            Contents © 2017         <a href="mailto:david@daviddworken.com">David Dworken</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
+            
+        </footer>
+</div>
+</div>
+
+
+            <script src="../../assets/js/all-nocdn.js"></script><script>$('a.image-reference:not(.islink) img:not(.islink)').parent().colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script><!-- fancy dates --><script>
+    moment.locale("");
+    fancydates(0, "YYYY-MM-DD HH:mm");
+    </script><!-- end fancy dates -->
+</body>
+</html>
